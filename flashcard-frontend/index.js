@@ -7,7 +7,7 @@ function getDecks() {
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
-            main.innerHTML += decks.map(deck => `<li><a href="#" data-id="${deck.id}">${deck.name} - ${deck.count}</a></li>`).join('')
+            main.innerHTML += decks.map(deck => `<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>`).join('')
             main.innerHTML += "</ul>"
             attachClickToDeckLinks()
         })
@@ -16,7 +16,7 @@ function getDecks() {
 }
 
 function clearForm() {
-    let deckFormDiv = document.getElementById(deck - form)
+    let deckFormDiv = document.getElementById("deck-form")
     deckFormDiv.innerHTML = ''
 }
 
@@ -27,4 +27,4 @@ function attachClickToDeckLinks() {
     })
 }
 
-function displayDeck()
+function displayDeck() {}
