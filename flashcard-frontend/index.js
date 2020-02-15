@@ -2,7 +2,7 @@ const MAIN_URL = "http://localhost:3000"
 
 function getDecks() {
     clearForm()
-    let main = document.getElementById("main")
+    let main = document.getElementById("main-list")
     main.innerHTML = "<ul>"
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
