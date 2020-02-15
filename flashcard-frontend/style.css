@@ -1,0 +1,94 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #658C9E;
+    color: white;
+}
+
+h1 {
+    font-size: 300%;
+}
+
+p {
+    font-size: 120%;
+    line-height: 1.75;
+}
+
+a {
+    color: #c1cfe3;
+    /*no underline for links*/
+    text-decoration: none;
+}
+
+div {
+    border-width: 1px;
+    border-style: dashed;
+    border-color: transparent;
+    /*rounded corners*/
+    border-radius: 10px;
+}
+
+
+/*created class to float image*/
+
+.right {
+    float: right;
+}
+
+img.snapshot {
+    border-width: 5px;
+    border-style: solid;
+    border-color: white;
+    /*drop shadow values: horizontal, vertical, blur, color(r,g,b, a-opacity %)*/
+    box-shadow: 10px 10px 15px rgba(68, 90, 110, .3);
+    /*tilting of image*/
+    transform: rotate(-5deg);
+}
+
+#container {
+    width: 80%;
+    margin: auto;
+    margin-top: 60px;
+}
+
+#main {
+    background-color: #7fbac7;
+    padding: 30px;
+    box-shadow: 10px 10px 15px rgba(68, 90, 110);
+}
+
+#priority {
+    background-color: #d3e0bc;
+    color: #658C9E;
+    width: 75%;
+    text-align: center;
+    margin: auto;
+    text-transform: capitalize;
+    clear: both;
+    /*drop shadow values: horizontal, vertical, blur, color*/
+    box-shadow: 5px 5px 15px rgba(123, 138, 156);
+}
+
+
+/* for the link in priority only*/
+
+#priority a {
+    color: #658C9E;
+}
+
+
+/*pseudoclass - for link in priority only*/
+
+#priority a:hover {
+    color: #c1cfe3
+}
+
+#footer {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 50%;
+    padding: 15px;
+}
+
+#footer img {
+    margin: 5px;
+}
