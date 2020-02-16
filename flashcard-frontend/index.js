@@ -12,8 +12,8 @@ function getDecks() {
 }
 
 function clearForm() {
-    let deckFormDivList = document.getElementById("deck-form-list")
-    deckFormDivList.innerHTML = ''
+    let deckFormDiv = document.getElementById("deck-form")
+    deckFormDiv.innerHTML = ''
 }
 
 function attachClickToDeckLinks() {
