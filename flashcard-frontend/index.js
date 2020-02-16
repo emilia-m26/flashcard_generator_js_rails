@@ -48,9 +48,10 @@ function createDeck() {
         })
         .then(resp => resp.json())
         .then(deck => {
-            document.querySelector("#main-list").innerHTML += `
-            <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>
+            document.querySelector("#main-list ul").innerHTML += `
+            <li>${deck.name} - (${deck.cards.length})</li>
             `
+                //<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>
             clearForm()
         })
 
@@ -64,7 +65,7 @@ function displayDeck(event) {
 }
 
 window.addEventListener('load', () => {
-    getDecks()
-    attachClickToDeckLinks()
+    //getDecks()
+    //attachClickToDeckLinks()
     displayCreateForm()
 })
