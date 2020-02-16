@@ -11,13 +11,11 @@ function getDecks() {
             main.innerHTML += "</ul>"
             attachClickToDeckLinks()
         })
-
-
 }
 
 function clearForm() {
-    let deckFormDiv = document.getElementById("deck-form")
-    deckFormDiv.innerHTML = ''
+    let deckFormDivList = document.getElementById("deck-form-list")
+    deckFormDivList.innerHTML = ''
 }
 
 function attachClickToDeckLinks() {
@@ -27,4 +25,26 @@ function attachClickToDeckLinks() {
     })
 }
 
-function displayDeck() {}
+function displayCreateForm() {
+    let deckFormDiv = document.getElementById("deck-form")
+    let html = `
+        <form onsubmit="createDeck(); return false;">
+        <label>Name</label>
+        <input type="text" id="name">
+        <input type="submit" value="Create New Deck">
+    `
+    deckFormDiv.innerHTML = html
+}
+
+
+function displayDeck(event) {
+    event.preventDefault()
+    clearForm()
+
+}
+
+window.addEventListener('load', () => {
+    getDecks()
+    attachClickToDeckLinks()
+    displayCreateForm()
+})
