@@ -49,9 +49,8 @@ function createDeck() {
         .then(resp => resp.json())
         .then(deck => {
             document.querySelector("#main-list ul").innerHTML += `
-            <li>${deck.name} - (${deck.cards.length})</li>
+            <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>
             `
-                //<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>
             clearForm()
         })
 
