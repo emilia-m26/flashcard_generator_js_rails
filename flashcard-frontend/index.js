@@ -2,13 +2,11 @@ const MAIN_URL = "http://localhost:3000"
 
 function getDecks() {
     clearForm()
-    let main = document.getElementById("main-list")
-    main.innerHTML = "<ul>"
+    let main = document.querySelector("#main-list ul")
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
             main.innerHTML += decks.map(deck => `<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>`).join('')
-            main.innerHTML += "</ul>"
             attachClickToDeckLinks()
         })
 }
@@ -34,6 +32,26 @@ function displayCreateForm() {
         <input type="submit" value="Create New Deck">
     `
     deckFormDiv.innerHTML = html
+}
+
+function createDeck() {
+    const deck = {
+        name: document.getElementById("name").value
+    }
+    fetch(MAIN_URL + "/decks", {
+            method: "POST",
+            body: JSON.stringify(deck),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then(deck => {
+            document.querySelector("#main-list").innerHTML += `
+            <li>${deck.name} - (${deck.cards.length})</li>
+            `
+        })
 }
 
 
