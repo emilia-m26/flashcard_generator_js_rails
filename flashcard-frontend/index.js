@@ -78,12 +78,11 @@ function displayDeck(event) {
         .then(resp => resp.json())
         .then(deck => {
             main.innerHTML += `
-        <h3>${deck.name}</h3><hr>
-        <h4>All cards of specific deck will show here - Questions only</h4>
+            <h3>${deck.name}</h3><hr>
+            <h4>All cards of specific deck will show here - Questions only</h4>
         `
-                //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+                //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>    
                 //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
-
         })
 }
 
@@ -112,7 +111,7 @@ function editDeck(id) {
             <form onsubmit="updateDeck(${id});return false;">
             <label>Name:</label>
             <input type ="text" id="name" value="${deck.name}"></br>
-            <input type ="submit" value="Edit">
+            <input type ="submit" value="Submit Edit">
         `
             deckFormDiv.innerHTML = html
         })
@@ -134,7 +133,7 @@ function updateDeck(id) {
         .then(resp => resp.json())
         .then((deck) => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-                <a href="#" data-id="${deck.id}">${deck.name}</a>
+                <a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
                 <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 `
