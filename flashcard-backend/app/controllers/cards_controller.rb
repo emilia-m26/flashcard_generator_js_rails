@@ -3,7 +3,9 @@ class CardsController < ApplicationController
 
   # GET /cards
   def index
-    @cards = Card.all
+    @deck = Deck.find_by(id:params[:deck_id])
+    @cards = @deck.cards
+    #@cards = Card.all
 
     render json: @cards
   end
