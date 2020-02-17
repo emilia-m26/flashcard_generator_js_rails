@@ -1,5 +1,11 @@
 const MAIN_URL = "http://localhost:3000"
 
+window.addEventListener('load', () => {
+    getDecks()
+    attachClickToDeckLinks()
+    displayCreateForm()
+})
+
 function getDecks() {
     clearForm()
     let main = document.querySelector("#main-list ul")
@@ -62,9 +68,3 @@ function displayDeck(event) {
     clearForm()
 
 }
-
-window.addEventListener('load', () => {
-    getDecks()
-    attachClickToDeckLinks()
-    displayCreateForm()
-})
