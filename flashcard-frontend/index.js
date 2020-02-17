@@ -62,9 +62,21 @@ function createDeck() {
 
 }
 
-
+//show view
 function displayDeck(event) {
     event.preventDefault()
     clearForm()
+    let id = this.dataset.id
+    let main = document.querySelector("#main-list ul")
+    main.innerHTML = ""
+    fetch(MAIN_URL + `/decks/${id}`)
+        .then(resp => resp.json())
+        .then(deck => {
+            main.innerHTML += `
+        <h3>${deck.name}</h3><hr>
+        <h4>All cards of specific deck will show here - Questions only</h4>
+        `
+        })
+
 
 }
