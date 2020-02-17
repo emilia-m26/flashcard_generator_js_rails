@@ -62,7 +62,6 @@ function createDeck() {
             <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
             <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
             `
-
             clearForm()
         })
 
