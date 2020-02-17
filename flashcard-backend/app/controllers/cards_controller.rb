@@ -10,7 +10,8 @@ class CardsController < ApplicationController
 
   # GET /cards/1
   def show
-    render json: @card
+    card = Card.find_by(id: params[:id])
+    render json:  @card
   end
 
   # POST /cards
@@ -46,6 +47,6 @@ class CardsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def card_params
-      params.require(:card).permit(:question, :answer)
+      params.require(:card).permit(:question, :answer, :deck_id)
     end
 end

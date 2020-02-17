@@ -10,7 +10,9 @@ class DecksController < ApplicationController
 
   # GET /decks/1
   def show
+    #deck = Deck.find_by(id: params[:id])
     render json: @deck
+    
   end
 
   # POST /decks

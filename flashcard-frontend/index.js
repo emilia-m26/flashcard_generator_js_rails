@@ -80,6 +80,8 @@ function displayDeck(event) {
             main.innerHTML += `
             <h3>${deck.name}</h3><hr>
             <h4>All cards of specific deck will show here - Questions only</h4>
+            <h5>${deck.name}</h5>
+            <h5>${deck.cards.length}</h5>
         `
                 //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>    
                 //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
