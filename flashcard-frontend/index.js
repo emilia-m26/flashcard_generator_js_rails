@@ -85,7 +85,6 @@ function displayDeck(event) {
                 //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
 
-
         })
 }
 
@@ -101,4 +100,48 @@ function removeDeck(id) {
             }
         })
         .then(event.target.parentElement.remove())
+}
+
+
+function editDeck(id) {
+    clearForm()
+    fetch(MAIN_URL + `/decks/${id}`)
+        .then(resp => resp.json())
+        .then(deck => {
+            let deckFormDiv = document.getElementById("deck-form")
+            let html = `
+            <form onsubmit="updateDeck(${id});return false;">
+            <label>Name:</label>
+            <input type ="text" id="name" value="${deck.name}"></br>
+            <input type ="submit" value="Edit">
+        `
+            deckFormDiv.innerHTML = html
+        })
+}
+
+//patch to update route
+function updateDeck(id) {
+    const deck = {
+        name: document.getElementById("name").value,
+    }
+    fetch(MAIN_URL + `/decks/${id}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(deck)
+        })
+        .then(resp => resp.json())
+        .then((deck) => {
+                document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
+                <a href="#" data-id="${deck.id}">${deck.name}</a>
+                <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
+                <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+                `
+                attachClickToDeckLinks()
+                clearForm()
+            }
+
+        )
 }
