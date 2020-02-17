@@ -136,8 +136,9 @@ function updateDeck(id) {
         .then((deck) => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
                 <a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
-                <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+                <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
+                
                 `
                 attachClickToDeckLinks()
                 clearForm()
