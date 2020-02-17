@@ -64,7 +64,7 @@ function displayDeck(event) {
 }
 
 window.addEventListener('load', () => {
-    //getDecks()
-    //attachClickToDeckLinks()
+    getDecks()
+    attachClickToDeckLinks()
     displayCreateForm()
 })
