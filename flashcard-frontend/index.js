@@ -12,7 +12,10 @@ function getDecks() {
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
-            main.innerHTML += decks.map(deck => `<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>`).join('')
+            main.innerHTML += decks.map(deck => `<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
+            <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
+            </li>`).join('')
             attachClickToDeckLinks()
         })
 }
@@ -55,7 +58,10 @@ function createDeck() {
         .then(resp => resp.json())
         .then(deck => {
             document.querySelector("#main-list ul").innerHTML += `
-            <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a></li>
+            <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
+            <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
+            
             `
             clearForm()
         })
