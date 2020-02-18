@@ -1,6 +1,6 @@
 class DecksController < ApplicationController
   before_action :set_deck, only: [:show, :update, :destroy]
-
+  #skip_before_action :verify_authenticity_token
   # GET /decks
   def index
     @decks = Deck.all

@@ -1,6 +1,7 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :update, :destroy]
-
+  #skip_before_action :verify_authenticity_token
+  
   # GET /cards
   def index
     #@deck = Deck.find_by(id:params[:deck_id])

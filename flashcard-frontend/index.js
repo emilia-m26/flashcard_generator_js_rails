@@ -77,14 +77,31 @@ function displayDeck(event) {
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
         .then(deck => {
-            main.innerHTML += `
-            <h3>${deck.name}</h3><hr>
-            <h4>All cards of specific deck will show here - Questions only</h4>
-            <h5>${deck.name}</h5>
-            <h5>${deck.cards[0].question} - (${deck.cards[0].answer}) </h5>
-        `
+            for (const card of deck.cards) {
+                renderQuestion(card);
+            }
+            //     main.innerHTML += `
+            //     <hr>
+            //     <h4>${deck.name}</h4>
+            //     <h5>${deck.cards[0].question} - (${deck.cards[0].answer}) </h5>
+            //     <h5>${deck.cards[1].question} - (${deck.cards[1].answer}) </h5>
+            //     <button data-id=${deck.id} onclick="getCardAnswerDeck(${deck.id})"; return false;>Get Answer</button></li>
+            // `
+            // })
         })
 }
+
+function renderQuestion(card) {
+    const cardInfo = document.querySelector("#main-list ul");
+    cardInfo.innerHTML += `
+    <li><h4>${card.question}</h4></li>
+    `
+}
+
+
+// for (const element of deck.cards) {
+//     console.log(element.question);
+// }
 
 //delete route
 function removeDeck(id) {
