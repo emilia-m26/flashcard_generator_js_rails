@@ -3,16 +3,16 @@ class CardsController < ApplicationController
 
   # GET /cards
   def index
-    @deck = Deck.find_by(id:params[:deck_id])
-    @cards = @deck.cards
-    #@cards = Card.all
+    #@deck = Deck.find_by(id:params[:deck_id])
+    #@cards = @deck.cards
+    @cards = Card.all
 
     render json: @cards
   end
 
   # GET /cards/1
   def show
-    card = Card.find_by(id: params[:id])
+    #card = Card.find_by(id: params[:id])
     render json:  @card
   end
 
