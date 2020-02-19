@@ -3,7 +3,7 @@ const MAIN_URL = "http://localhost:3000"
 window.addEventListener('load', () => {
     getDecks()
     attachClickToDeckLinks()
-    displayCreateForm()
+        //displayCreateForm()
 })
 
 function getDecks() {
@@ -80,28 +80,56 @@ function displayDeck(event) {
             for (const card of deck.cards) {
                 renderQuestion(card);
             }
+            // for (const element of deck.cards) {
+            //     console.log(element.question);
+            // }
             //     main.innerHTML += `
             //     <hr>
             //     <h4>${deck.name}</h4>
             //     <h5>${deck.cards[0].question} - (${deck.cards[0].answer}) </h5>
             //     <h5>${deck.cards[1].question} - (${deck.cards[1].answer}) </h5>
-            //     <button data-id=${deck.id} onclick="getCardAnswerDeck(${deck.id})"; return false;>Get Answer</button></li>
+            //     <button data-id=${deck.id} onclick="getCardAnswer(${deck.id})"; return false;>Get Answer</button></li>
             // `
             // })
         })
 }
 
+//have button go to answer for specific question OR make question a link to the answer
 function renderQuestion(card) {
     const cardInfo = document.querySelector("#main-list ul");
     cardInfo.innerHTML += `
-    <li><h4>${card.question}</h4></li>
+    <li><a href="#" data-id="${card.id}"><h4>${card.question}</h4></a>
+    <button data-id=${card.id} onclick="renderCardAnswer(${card.id})"; return false;>Get Answer</button>
+    </li>
     `
+    attachClickToCardLinks()
+}
+
+function attachClickToCardLinks() {
+    let cards = document.querySelectorAll("li a")
+    cards.forEach(card => {
+        card.addEventListener('click', renderCardAnswer)
+    })
+}
+
+function renderCardAnswer(event) {
+    event.preventDefault()
+    clearForm()
+    let id = this.dataset.id
+    let main = document.querySelector("#main-list ul")
+    main.innerHTML = ""
+    fetch(MAIN_URL + `/decks/${id}`)
+        .then(resp => resp.json())
+        .then(deck => {
+            for (const card of deck.cards) {
+                renderQuestion(card);
+            }
+
+        })
 }
 
 
-// for (const element of deck.cards) {
-//     console.log(element.question);
-// }
+
 
 //delete route
 function removeDeck(id) {
