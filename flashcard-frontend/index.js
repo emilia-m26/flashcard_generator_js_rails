@@ -17,7 +17,6 @@ function getDecks() {
             <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>`).join('')
             attachClickToDeckLinks()
         })
-
 }
 
 function clearForm() {
@@ -133,10 +132,20 @@ function renderCardAnswer(event) {
         .then(resp => resp.json())
         .then(deck => {
             for (const card of deck.cards) {
-                renderQuestion(card);
+                renderAnswer(card);
             }
 
         })
+}
+
+//shows all - need it to show one specific answer
+function renderAnswer(card) {
+    const cardInfo = document.querySelector("#main-list ul");
+    cardInfo.innerHTML += `
+    <li>
+    <a href="#" data-id="${card.id}"><h4>${card.answer}</h4></a>
+    </li>
+    `
 }
 
 
