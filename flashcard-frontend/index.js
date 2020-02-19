@@ -36,8 +36,19 @@ function displayCreateForm() {
     let deckFormDiv = document.getElementById("deck-form")
     let html = `
         <form onsubmit="createDeck(); return false;">
-        <label>Name</label>
+        <label>Topic</label>
         <input type="text" id="name">
+
+        <p><label>Question</label>
+        <input type="text" id="question">
+        <label>Answer</label>
+        <input type="text" id="answer"></p>
+
+        <p><label>Question</label>
+        <input type="text" id="question">
+        <label>Answer</label>
+        <input type="text" id="answer"></p>
+
         <input type="submit" value="Create New Deck">
     `
     deckFormDiv.innerHTML = html
