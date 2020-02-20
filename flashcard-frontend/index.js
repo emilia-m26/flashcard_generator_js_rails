@@ -39,23 +39,34 @@ function displayCreateForm() {
         <input type="text" id="name">
 
         <p><label>Question</label>
-        <input type="text" id="question">
-        <label>Answer</label>
-        <input type="text" id="answer"></p>
+            <input type="text" id="card[question]">
+            <label>Answer</label>
+            <input type="text" id="card[answer]"></p>
+    
+            <p><label>Question</label>
+            <input type="text" id="card[question]">
+            <label>Answer</label>
+            <input type="text" id="card[answer]"></p>
 
-        <p><label>Question</label>
-        <input type="text" id="question">
-        <label>Answer</label>
-        <input type="text" id="answer"></p>
+            <input type="hidden" id="deck_id" name="deck_id" value="deck.id">
 
         <input type="submit" value="Create New Deck">
     `
     deckFormDiv.innerHTML = html
+
+
 }
+
 
 function createDeck() {
     const deck = {
-        name: document.getElementById("name").value
+        name: document.getElementById("name").value,
+        cards: [{
+            question: document.getElementById("card[question]").value,
+            answer: document.getElementById("card[answer]").value,
+            //deck_id: deck.id
+        }]
+
     }
     fetch(MAIN_URL + "/decks", {
             method: "POST",
@@ -70,7 +81,7 @@ function createDeck() {
             document.querySelector("#main-list ul").innerHTML += `
             <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
             <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
+            <button data-id=${ddeck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
             `
             clearForm()
         })
@@ -90,17 +101,6 @@ function displayDeck(event) {
             for (const card of deck.cards) {
                 renderQuestion(card);
             }
-            // for (const element of deck.cards) {
-            //     console.log(element.question);
-            // }
-            //     main.innerHTML += `
-            //     <hr>
-            //     <h4>${deck.name}</h4>
-            //     <h5>${deck.cards[0].question} - (${deck.cards[0].answer}) </h5>
-            //     <h5>${deck.cards[1].question} - (${deck.cards[1].answer}) </h5>
-            //     <button data-id=${deck.id} onclick="getCardAnswer(${deck.id})"; return false;>Get Answer</button></li>
-            // `
-            // })
         })
 }
 
@@ -142,19 +142,16 @@ function renderCardAnswer(event) {
 function renderAnswer(card) {
     const cardInfo = document.querySelector("#main-list ul");
     cardInfo.innerHTML += `
-    <li>
-    <a href="#" data-id="${card.id}"><h4>${card.answer}</h4></a>
-    </li>
+        <li>
+        <h4>${card.answer}</h4>
+        </li>
     `
 }
-
-
 
 
 //delete route
 function removeDeck(id) {
     clearForm()
-        //need to hand config object
     fetch(MAIN_URL + `/decks/${id}`, {
             method: "DELETE",
             headers: {

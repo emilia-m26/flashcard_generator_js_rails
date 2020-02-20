@@ -1,6 +1,8 @@
 class DecksController < ApplicationController
   before_action :set_deck, only: [:show, :update, :destroy]
   #skip_before_action :verify_authenticity_token
+
+
   # GET /decks
   def index
     @decks = Deck.all
@@ -18,8 +20,9 @@ class DecksController < ApplicationController
   # POST /decks
   def create
     @deck = Deck.new(deck_params)
-
+    
     if @deck.save
+      #byebug
       render json: @deck, status: :created, location: @deck
     else
       render json: @deck.errors, status: :unprocessable_entity
@@ -48,6 +51,8 @@ class DecksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def deck_params
-      params.require(:deck).permit(:name)
+      #params.require(:deck).permit(:name)
+      params.require(:deck).permit(:name, card: [:id, :question, :answer, :deck_id])
+
     end
 end
