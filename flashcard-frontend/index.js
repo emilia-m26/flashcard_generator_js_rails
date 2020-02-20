@@ -109,7 +109,8 @@ function displayDeck(event) {
 function renderQuestion(card) {
     const cardInfo = document.querySelector("#main-list ul");
     cardInfo.innerHTML += `
-    <li><a href="#" data-id="${card.id}"><h4>${card.question}</h4></a>
+    <li>
+    <a href="#" data-id="${card.id}"><h4>${card.question}</h4></a>
     <button data-id=${card.id} onclick="renderCardAnswer(${card.id})"; return false;>Get Answer</button>
     </li>
     `
@@ -134,23 +135,28 @@ function renderCardAnswer(event) {
         .then(card => {
             // for (const card of cards) {
             //     renderAnswer(card);
-            card.find(function(element) {
-                return element.answer;
-            })
+            //space
+            // card.find(function(element) {
+            //     return element.answer;
+
+            // for (const element in card) {
+            //     console.log(card.answer);
+            main.innerHTML += `
+            <h3>${card.answer}</h3>
+            `
         })
-
 }
 
 
-//shows all - need it to show one specific answer
-function renderAnswer(card) {
-    const cardInfo = document.querySelector("#main-list ul");
-    cardInfo.innerHTML += `
-        <li>
-        <h4>${card.answer}</h4>
-        </li>
-    `
-}
+// //shows all - need it to show one specific answer
+// function renderAnswer(card) {
+//     const cardInfo = document.querySelector("#main-list ul");
+//     cardInfo.innerHTML += `
+//         <li>
+//         <h4>${card.answer}</h4>
+//         </li>
+//     `
+// }
 
 
 //delete route
