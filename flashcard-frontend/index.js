@@ -42,16 +42,17 @@ function displayCreateForm() {
             <input type="text" id="card[question]">
             <label>Answer</label>
             <input type="text" id="card[answer]"></p>
-    
+
             <p><label>Question</label>
-            <input type="text" id="card[question]">
-            <label>Answer</label>
-            <input type="text" id="card[answer]"></p>
-
-            <input type="hidden" id="deck_id" name="deck_id" value="deck.id">
-
+                <input type="text" id="card[question]">
+                <label>Answer</label>
+                <input type="text" id="card[answer]"></p>
+    
         <input type="submit" value="Create New Deck">
+       
     `
+        //<input type="hidden" id="deck_id" name="deck_id" value=${deck.id}>
+
     deckFormDiv.innerHTML = html
 
 
@@ -81,7 +82,7 @@ function createDeck() {
             document.querySelector("#main-list ul").innerHTML += `
             <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
             <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-            <button data-id=${ddeck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
+            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
             `
             clearForm()
         })
@@ -128,15 +129,18 @@ function renderCardAnswer(event) {
     let id = this.dataset.id
     let main = document.querySelector("#main-list ul")
     main.innerHTML = ""
-    fetch(MAIN_URL + `/decks/${id}`)
+    fetch(MAIN_URL + `/cards/${id}`)
         .then(resp => resp.json())
-        .then(deck => {
-            for (const card of deck.cards) {
-                renderAnswer(card);
-            }
-
+        .then(card => {
+            // for (const card of cards) {
+            //     renderAnswer(card);
+            card.find(function(element) {
+                return element.answer;
+            })
         })
+
 }
+
 
 //shows all - need it to show one specific answer
 function renderAnswer(card) {
