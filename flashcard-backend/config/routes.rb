@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
 
-  #nested route
-  get '/decks/:id/cards', to:"cards#index", as:"deck_cards"
+  #nested indez
+  #get '/decks/:deck_id/cards', to:"cards#index", as:"deck_cards"
+  #nested
+  #post '/decks/:deck_id/cards', to:"cards#create"
 
 
   resources :cards
