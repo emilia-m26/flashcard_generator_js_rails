@@ -39,19 +39,18 @@ function displayCreateForm() {
         <form onsubmit="createDeck(); return false;">
         <label>Topic</label>
         <input type="text" id="name">
-
-        <p><label>Question</label>
-        <input type="text" id="cards[question]">
-        <label>Answer</label>
-        <input type="text" id="cards[answer]"></p>
-
-        <p><label>Question</label>
-        <input type="text" id="cards[question]">
-        <label>Answer</label>
-        <input type="text" id="cards[answer]"></p>
-        
         <input type="submit" value="Create New Deck">    
     `
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
     deckFormDiv.innerHTML = html
 }
 
@@ -163,6 +162,7 @@ function editDeck(id) {
             <form onsubmit="updateDeck(${id});return false;">
             <label>Name:</label>
             <input type ="text" id="name" value="${deck.name}"></br>
+        
             <input type ="submit" value="Submit Edit">
         `
             deckFormDiv.innerHTML = html
