@@ -2,7 +2,7 @@ const MAIN_URL = "http://localhost:3000"
 
 window.addEventListener('load', () => {
     getDecks()
-    attachClickToDeckLinks()
+        //attachClickToDeckLinks()
         //displayCreateForm()
 })
 
@@ -12,9 +12,11 @@ function getDecks() {
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
-            main.innerHTML += decks.map(deck => `<li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
-            <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>`).join('')
+            main.innerHTML += decks.map(deck => {
+                let newDeck = new Deck(deck)
+                return newDeck.renderDeck()
+                    //return string and put into new array with map, then returns new array filled with string then need to join
+            }).join("")
             attachClickToDeckLinks()
         })
 }
@@ -39,23 +41,18 @@ function displayCreateForm() {
         <input type="text" id="name">
 
         <p><label>Question</label>
-            <input type="text" id="card[question]">
-            <label>Answer</label>
-            <input type="text" id="card[answer]"></p>
+        <input type="text" id="cards[question]">
+        <label>Answer</label>
+        <input type="text" id="cards[answer]"></p>
 
-            <p><label>Question</label>
-                <input type="text" id="card[question]">
-                <label>Answer</label>
-                <input type="text" id="card[answer]"></p>
-    
-        <input type="submit" value="Create New Deck">
-       
+        <p><label>Question</label>
+        <input type="text" id="cards[question]">
+        <label>Answer</label>
+        <input type="text" id="cards[answer]"></p>
+        
+        <input type="submit" value="Create New Deck">    
     `
-        //<input type="hidden" id="deck_id" name="deck_id" value=${deck.id}>
-
     deckFormDiv.innerHTML = html
-
-
 }
 
 
@@ -63,8 +60,8 @@ function createDeck() {
     const deck = {
         name: document.getElementById("name").value,
         cards: [{
-            question: document.getElementById("card[question]").value,
-            answer: document.getElementById("card[answer]").value,
+            question: document.getElementById("cards[question]").value,
+            answer: document.getElementById("cards[answer]").value,
             //deck_id: deck.id
         }]
 
@@ -84,9 +81,9 @@ function createDeck() {
             <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
             <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
             `
+            attachClickToDeckLinks()
             clearForm()
         })
-
 }
 
 //show route
@@ -133,31 +130,11 @@ function renderCardAnswer(event) {
     fetch(MAIN_URL + `/cards/${id}`)
         .then(resp => resp.json())
         .then(card => {
-            // for (const card of cards) {
-            //     renderAnswer(card);
-            //space
-            // card.find(function(element) {
-            //     return element.answer;
-
-            // for (const element in card) {
-            //     console.log(card.answer);
             main.innerHTML += `
             <h3>${card.answer}</h3>
             `
         })
 }
-
-
-// //shows all - need it to show one specific answer
-// function renderAnswer(card) {
-//     const cardInfo = document.querySelector("#main-list ul");
-//     cardInfo.innerHTML += `
-//         <li>
-//         <h4>${card.answer}</h4>
-//         </li>
-//     `
-// }
-
 
 //delete route
 function removeDeck(id) {
@@ -171,7 +148,6 @@ function removeDeck(id) {
         })
         .then(event.target.parentElement.remove())
 }
-
 
 function editDeck(id) {
     clearForm()
@@ -203,16 +179,30 @@ function updateDeck(id) {
             body: JSON.stringify(deck)
         })
         .then(resp => resp.json())
-        .then((deck) => {
+        .then(deck => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
                 <a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
-                
                 `
                 attachClickToDeckLinks()
                 clearForm()
             }
 
         )
+}
+
+//OOJS
+class Deck {
+    constructor(deck) {
+        this.id = deck.id
+        this.name = deck.name
+    }
+    renderDeck() {
+        return `
+        <li><a href="#" data-id="${this.id}">${this.name}</a>
+        <button data-id=${this.id} onclick="editDeck(${this.id})"; return false;>Edit</button>
+        <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button></li>
+        `
+    }
 }

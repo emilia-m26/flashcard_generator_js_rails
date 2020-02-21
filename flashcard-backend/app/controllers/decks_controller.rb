@@ -20,9 +20,8 @@ class DecksController < ApplicationController
   # POST /decks
   def create
     @deck = Deck.new(deck_params)
-    
+    #byebug
     if @deck.save
-      #byebug
       render json: @deck, status: :created, location: @deck
     else
       render json: @deck.errors, status: :unprocessable_entity
@@ -52,7 +51,6 @@ class DecksController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def deck_params
       #params.require(:deck).permit(:name)
-      params.require(:deck).permit(:name, card: [:id, :question, :answer, :deck_id])
-
+      params.require(:deck).permit(:name, cards_attributes:[:id, :question, :answer, :deck_id])
     end
 end
