@@ -1,31 +1,10 @@
 const MAIN_URL = "http://localhost:3000"
 
 window.addEventListener('load', () => {
-    // getDecks()
-    //attachClickToDeckLinks()
-    //displayCreateForm()
+    getDecks()
+        //attachClickToDeckLinks()
+        //displayCreateForm()
 })
-
-function displayToy(toy) {
-    //display each toy on page
-    //attach to DOM
-    let toyCollection = document.querySelector("#toy-collection")
-    toyCollection.innerHTML += toyCard(toy)
-}
-
-//this happens fifth
-function toyCard(toy) {
-    //backticks to do string interpolation
-    //html template for card
-    return ` 
-  <div class="card">
-    <h2>${toy.name}</h2>
-    <img src=${toy.image} class="toy-avatar" />
-    <p>${toy.likes} </p>
-    <button class="like-btn">Like <3</button>
-  </div>
-`
-}
 
 function getDecks() {
     clearForm()
