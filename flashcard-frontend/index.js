@@ -1,10 +1,31 @@
 const MAIN_URL = "http://localhost:3000"
 
 window.addEventListener('load', () => {
-    getDecks()
-        //attachClickToDeckLinks()
-        //displayCreateForm()
+    // getDecks()
+    //attachClickToDeckLinks()
+    //displayCreateForm()
 })
+
+function displayToy(toy) {
+    //display each toy on page
+    //attach to DOM
+    let toyCollection = document.querySelector("#toy-collection")
+    toyCollection.innerHTML += toyCard(toy)
+}
+
+//this happens fifth
+function toyCard(toy) {
+    //backticks to do string interpolation
+    //html template for card
+    return ` 
+  <div class="card">
+    <h2>${toy.name}</h2>
+    <img src=${toy.image} class="toy-avatar" />
+    <p>${toy.likes} </p>
+    <button class="like-btn">Like <3</button>
+  </div>
+`
+}
 
 function getDecks() {
     clearForm()
@@ -106,16 +127,19 @@ function displayDeck(event) {
 function renderQuestion(card) {
     const cardInfo = document.querySelector("#main-list ul");
     cardInfo.innerHTML += `
-    <li>
-    <a href="#" data-id="${card.id}"><h4>${card.question}</h4></a>
-    <button data-id=${card.id} onclick="renderCardAnswer(${card.id})"; return false;>Get Answer</button>
-    </li>
+    
+    <div class = "card">
+        
+    <h4>${card.question}</h4>
+    <a href="#" data-id="${card.id}"><button data-id=${card.id} onclick="renderCardAnswer(${card.id})"; return false;>Get Answer</button></a>
+    </div>
+    
     `
     attachClickToCardLinks()
 }
 
 function attachClickToCardLinks() {
-    let cards = document.querySelectorAll("li a")
+    let cards = document.querySelectorAll(" a")
     cards.forEach(card => {
         card.addEventListener('click', renderCardAnswer)
     })
@@ -131,7 +155,10 @@ function renderCardAnswer(event) {
         .then(resp => resp.json())
         .then(card => {
             main.innerHTML += `
+            <div class = "card">
+        
             <h3>${card.answer}</h3>
+            </div>
             `
         })
 }
@@ -181,7 +208,7 @@ function updateDeck(id) {
         .then(resp => resp.json())
         .then(deck => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-                <a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
+                <a href="#" data-id="${deck.id}">${deck.name}</a>
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
                 `
@@ -200,9 +227,11 @@ class Deck {
     }
     renderDeck() {
         return `
-        <li><a href="#" data-id="${this.id}">${this.name}</a>
+        <li>
+        <a href="#" data-id="${this.id}">${this.name}</a>
         <button data-id=${this.id} onclick="editDeck(${this.id})"; return false;>Edit</button>
         <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button></li>
+         
         `
     }
 }
