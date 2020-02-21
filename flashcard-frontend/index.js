@@ -123,13 +123,11 @@ function displayDeck(event) {
         })
 }
 
-//have button go to answer for specific question OR make question a link to the answer
 function renderQuestion(card) {
     const cardInfo = document.querySelector("#main-list ul");
     cardInfo.innerHTML += `
     
-    <div class = "card">
-        
+    <div class = "card">  
     <h4>${card.question}</h4>
     <a href="#" data-id="${card.id}"><button data-id=${card.id} onclick="renderCardAnswer(${card.id})"; return false;>Get Answer</button></a>
     </div>
