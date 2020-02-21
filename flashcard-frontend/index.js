@@ -58,11 +58,11 @@ function displayCreateForm() {
 function createDeck() {
     const deck = {
         name: document.getElementById("name").value,
-        cards: [{
-            question: document.getElementById("cards[question]").value,
-            answer: document.getElementById("cards[answer]").value,
+        // cards: [{
+        //     question: document.getElementById("cards[question]").value,
+        //     answer: document.getElementById("cards[answer]").value,
 
-        }]
+        // }]
 
     }
     fetch(MAIN_URL + "/decks", {
@@ -76,7 +76,7 @@ function createDeck() {
         .then(resp => resp.json())
         .then(deck => {
             document.querySelector("#main-list ul").innerHTML += `
-            <li><a href="#" data-id="${deck.id}">${deck.name} - (${deck.cards.length})</a>
+            <li><a href="#" data-id="${deck.id}">${deck.name}</a>
             <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
             <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
             `
@@ -132,12 +132,12 @@ function renderCardAnswer(event) {
         .then(card => {
             main.innerHTML += `
             <div class = "card">
-        
-            <h3>${card.answer}</h3>
+            <h4>${card.answer}</h4>
             </div>
             `
         })
 }
+
 
 //delete route
 function removeDeck(id) {
