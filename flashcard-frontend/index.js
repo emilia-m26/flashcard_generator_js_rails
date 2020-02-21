@@ -62,7 +62,7 @@ function createDeck() {
         cards: [{
             question: document.getElementById("cards[question]").value,
             answer: document.getElementById("cards[answer]").value,
-            //deck_id: deck.id
+
         }]
 
     }
