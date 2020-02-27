@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
         //displayCreateForm()
 })
 
+//get - index
 function getDecks() {
     clearForm()
     let main = document.querySelector("#main-list ul")
@@ -41,20 +42,21 @@ function displayCreateForm() {
         <input type="text" id="name">
         <input type="submit" value="Create New Deck">    
     `
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
     deckFormDiv.innerHTML = html
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
 }
 
-
+//post - create
 function createDeck() {
     const deck = {
         name: document.getElementById("name").value,
@@ -75,17 +77,22 @@ function createDeck() {
         })
         .then(resp => resp.json())
         .then(deck => {
-            document.querySelector("#main-list ul").innerHTML += `
-            <li><a href="#" data-id="${deck.id}">${deck.name}</a>
-            <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
-            `
+            let deckInstance = new Deck(deck)
+
+            document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck()
+
+            //document.querySelector("#main-list ul").innerHTML += `
+            //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
+            //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+            //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
+            //`
+
             attachClickToDeckLinks()
             clearForm()
         })
 }
 
-//show route
+//get - show route
 function displayDeck(event) {
     event.preventDefault()
     clearForm()
@@ -198,6 +205,7 @@ function updateDeck(id) {
 
 //OOJS
 class Deck {
+    //similar to instantiating in Ruby
     constructor(deck) {
         this.id = deck.id
         this.name = deck.name
