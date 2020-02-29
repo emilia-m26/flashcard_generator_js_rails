@@ -78,7 +78,6 @@ function createDeck() {
         .then(resp => resp.json())
         .then(deck => {
             let deckInstance = new Deck(deck)
-
             document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck()
 
             //document.querySelector("#main-list ul").innerHTML += `
@@ -205,7 +204,6 @@ function updateDeck(id) {
 
 //OOJS
 class Deck {
-    //similar to instantiating in Ruby
     constructor(deck) {
         this.id = deck.id
         this.name = deck.name
