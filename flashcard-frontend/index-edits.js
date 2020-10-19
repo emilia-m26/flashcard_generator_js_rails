@@ -103,15 +103,24 @@ function displayDeck(event) {
         .then(resp => resp.json())
         .then(deck => {
             for (const card of deck.cards) {
-                renderFront(card);
+                renderFlashcard(card);
             }
         })
 }
 
-function renderFront(card) {
+function renderFlashcard(card) {
     const cardInfo = document.querySelector("#main-list ul");
+    //below displays card
     cardInfo.innerHTML += `
     
+
+    <div class="flipCard">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="side front">${card.card_front}</div>
+            <div class="side back">${card.card_back}</div>
+        </div>
+    </div>
+
     <div class = "card">  
     <h4>${card.card_front}</h4>
     <a href="#" data-id="${card.id}"><button data-id=${card.id} onclick="renderBack(${card.id})"; return false;>Get Answer</button></a>
