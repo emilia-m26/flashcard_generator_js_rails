@@ -78,7 +78,7 @@ function createDeck() {
         .then(resp => resp.json())
         .then(deck => {
             let deckInstance = new Deck(deck)
-            document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck()
+            document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
 
             //document.querySelector("#main-list ul").innerHTML += `
             //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
@@ -119,6 +119,11 @@ function renderFlashcard(card) {
             <div class="side front">${card.card_front}</div>
             <div class="side back">${card.card_back}</div>
         </div>
+        <br>
+        <div class=buttons>
+            <button data-id=${this.id} onclick="editCard(${this.id})"; return false;>Edit</button>
+            <button data-id=${this.id} onclick="removeCard(${this.id})"; return false;>Delete</button></li>
+        </div>
     </div>
 
     <div class = "card">  
@@ -137,22 +142,22 @@ function attachClickToCardLinks() {
     })
 }
 
-function renderBack(event) {
-    //event.preventDefault();
-    clearForm();
-    let id = this.dataset.id;
-    let main = document.querySelector("#main-list ul")
-    main.innerHTML = ""
-    fetch(MAIN_URL + `/cards/${id}`)
-        .then(resp => resp.json())
-        .then(card => {
-            main.innerHTML += `
-            <div class = "card">
-            <h4>${card.card_back}</h4>
-            </div>
-            `
-        })
-}
+// function renderBack(event) {
+//     //event.preventDefault();
+//     clearForm();
+//     let id = this.dataset.id;
+//     let main = document.querySelector("#main-list ul")
+//     main.innerHTML = ""
+//     fetch(MAIN_URL + `/cards/${id}`)
+//         .then(resp => resp.json())
+//         .then(card => {
+//             main.innerHTML += `
+//             <div class = "card">
+//             <h4>${card.card_back}</h4>
+//             </div>
+//             `
+//         })
+// }
 
 
 //delete route
@@ -205,8 +210,8 @@ function updateDeck(id) {
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
                 `
-                attachClickToDeckLinks()
-                clearForm()
+                attachClickToDeckLinks();
+                clearForm();
             }
 
         )
