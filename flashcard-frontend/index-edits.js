@@ -121,18 +121,13 @@ function renderFlashcard(card) {
         </div>
         <br>
         <div class=buttons>
-            <button data-id=${this.id} onclick="editCard(${this.id})"; return false;>Edit</button>
-            <button data-id=${this.id} onclick="removeCard(${this.id})"; return false;>Delete</button></li>
+            <button data-id=${card.id} onclick="editCard(${card.id})"; return false;>Edit</button>
+            <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button></li>
         </div>
-    </div>
-
-    <div class = "card">  
-    <h4>${card.card_front}</h4>
-    <a href="#" data-id="${card.id}"><button data-id=${card.id} onclick="renderBack(${card.id})"; return false;>Get Answer</button></a>
     </div>
     
     `
-    attachClickToCardLinks()
+    //attachClickToCardLinks()
 }
 
 function attachClickToCardLinks() {
