@@ -137,24 +137,6 @@ function attachClickToCardLinks() {
     })
 }
 
-// function renderBack(event) {
-//     //event.preventDefault();
-//     clearForm();
-//     let id = this.dataset.id;
-//     let main = document.querySelector("#main-list ul")
-//     main.innerHTML = ""
-//     fetch(MAIN_URL + `/cards/${id}`)
-//         .then(resp => resp.json())
-//         .then(card => {
-//             main.innerHTML += `
-//             <div class = "card">
-//             <h4>${card.card_back}</h4>
-//             </div>
-//             `
-//         })
-// }
-
-
 //delete route
 function removeDeck(id) {
     clearForm()
