@@ -16,12 +16,13 @@
 }
 
 .flipCard .card .back {
+    font-family: Georgia;
+    font-size: 3em;
+    text-align: center;
+    line-height: 160px;
     background-color: #ff7f50;
     border: 3px solid white;
-    text-align: center;
     color: white;
-    font-family: Georgia;
-    font-size: 2em;
     transform: rotatey(-180deg);
 }
 
