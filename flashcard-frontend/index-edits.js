@@ -129,7 +129,7 @@ function attachClickToCardLinks() {
 }
 
 function renderBack(event) {
-    event.preventDefault();
+    //event.preventDefault();
     clearForm();
     let id = this.dataset.id;
     let main = document.querySelector("#main-list ul")
