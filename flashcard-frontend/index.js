@@ -1,14 +1,14 @@
 const MAIN_URL = "http://localhost:3000"
 
 window.addEventListener('load', () => {
-    getDecks()
+    getDecks();
         //attachClickToDeckLinks()
         //displayCreateForm()
 })
 
 //get - index
 function getDecks() {
-    clearForm()
+    clearForm();
     let main = document.querySelector("#main-list ul")
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
@@ -17,8 +17,8 @@ function getDecks() {
                 let newDeck = new Deck(deck)
                 return newDeck.renderDeck()
                     //return string and put into new array with map, then returns new array filled with string then need to join
-            }).join("")
-            attachClickToDeckLinks()
+            }).join("");
+            attachClickToDeckLinks();
         })
 }
 
