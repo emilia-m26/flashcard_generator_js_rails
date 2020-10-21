@@ -138,7 +138,21 @@ function renderFlashcard(card) {
 // }
 
 function editCard(cardId) {
-    console.log(cardId);
+    //console.log(cardId);
+    //clearForm();
+    fetch(MAIN_URL + `/decks/${id}`)
+        .then(resp => resp.json())
+        .then(deck => {
+            let cardFormDiv = document.getElementById("card-form")
+            let html = `
+            <form onsubmit="updateDeck(${id});return false;">
+            <label>Name:</label>
+            <input type ="text" id="name" value="${deck.name}"></br>
+        
+            <input type ="submit" value="Submit Edit">
+        `
+            cardFormDiv.innerHTML = html
+        })
 }
 
 
