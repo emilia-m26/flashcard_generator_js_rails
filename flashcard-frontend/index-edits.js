@@ -137,6 +137,9 @@ function renderFlashcard(card) {
 //     })
 // }
 
+function editCard(cardId) {
+    console.log(cardId);
+}
 
 
 //delete route
