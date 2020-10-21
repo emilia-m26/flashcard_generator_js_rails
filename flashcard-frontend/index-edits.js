@@ -23,26 +23,26 @@ function getDecks() {
 }
 
 function clearForm() {
-    let deckFormDiv = document.getElementById("deck-form")
+    let deckFormDiv = document.getElementById("deck-form");
     deckFormDiv.innerHTML = ''
 }
 
 function attachClickToDeckLinks() {
-    let decks = document.querySelectorAll("li a")
+    let decks = document.querySelectorAll("li a");
     decks.forEach(deck => {
         deck.addEventListener('click', displayDeck)
-    })
+    });
 }
 
 function displayCreateForm() {
-    let deckFormDiv = document.getElementById("deck-form")
+    let deckFormDiv = document.getElementById("deck-form");
     let html = `
         <form onsubmit="createDeck(); return false;">
         <label>Topic</label>
         <input type="text" id="name">
         <input type="submit" value="Create New Deck">    
     `
-    deckFormDiv.innerHTML = html
+    deckFormDiv.innerHTML = html;
 
     // <p><label>Question</label>
     // <input type="text" id="cards[question]">
@@ -149,21 +149,21 @@ function editCard(id) {
             <label>Topic Name:</label>
             <input type ="text" id="name" value="${card.deck.name}"></br>
             <label>Flashcard Front:</label>
-            <input type ="text" id="name" value="${card.card_front}"></br>
+            <input type ="text" id="card_front" value="${card.card_front}"></br>
             <label>Flashcard Back:</label>
-            <input type ="text" id="name" value="${card.card_back}"></br>
+            <input type ="text" id="card_back" value="${card.card_back}"></br>
         
         
             <input type ="submit" value="Submit Edit">
         `
-            cardFormDiv.innerHTML = html
+            cardFormDiv.innerHTML = html;
         })
 }
 
 
 //delete route
 function removeDeck(id) {
-    clearForm()
+    clearForm();
     fetch(MAIN_URL + `/decks/${id}`, {
             method: "DELETE",
             headers: {
@@ -171,11 +171,11 @@ function removeDeck(id) {
                 "Accept": "application/json"
             }
         })
-        .then(event.target.parentElement.remove())
+        .then(event.target.parentElement.remove());
 }
 
 function editDeck(id) {
-    clearForm()
+    clearForm();
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
         .then(deck => {
@@ -187,7 +187,7 @@ function editDeck(id) {
         
             <input type ="submit" value="Submit Edit">
         `
-            deckFormDiv.innerHTML = html
+            deckFormDiv.innerHTML = html;
         })
 }
 
