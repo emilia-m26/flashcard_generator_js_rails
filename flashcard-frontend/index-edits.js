@@ -137,17 +137,22 @@ function renderFlashcard(card) {
 //     })
 // }
 
-function editCard(cardId) {
-    //console.log(cardId);
+function editCard(id) {
+    console.log(id);
     //clearForm();
-    fetch(MAIN_URL + `/decks/${id}`)
+    fetch(MAIN_URL + `/cards/${id}`)
         .then(resp => resp.json())
-        .then(deck => {
+        .then(card => {
             let cardFormDiv = document.getElementById("card-form")
             let html = `
-            <form onsubmit="updateDeck(${id});return false;">
-            <label>Name:</label>
-            <input type ="text" id="name" value="${deck.name}"></br>
+            <form onsubmit="updateCard(${card.id});return false;">
+            <label>Topic Name:</label>
+            <input type ="text" id="name" value="${card.deck.name}"></br>
+            <label>Flashcard Front:</label>
+            <input type ="text" id="name" value="${card.card_front}"></br>
+            <label>Flashcard Back:</label>
+            <input type ="text" id="name" value="${card.card_back}"></br>
+        
         
             <input type ="submit" value="Submit Edit">
         `
