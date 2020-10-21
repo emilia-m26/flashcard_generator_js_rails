@@ -56,6 +56,32 @@ function displayCreateForm() {
 
 }
 
+/* this function will need to pull deck id
+so flashcard is assigned to correct deck*/
+function displayCreateCardForm() {
+    let cardFormDiv = document.getElementById("card-form");
+    let html = `
+        <form onsubmit="createCard(); return false;">
+        <label>Flashcard Front</label>
+        <input type="text" id="card_front">
+        <label>Flashcard Back</label>
+        <input type="text" id="card_back">
+        <input type="submit" value="Create New FlashCard">    
+    `
+    cardFormDiv.innerHTML = html;
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
+}
+
 //post - create
 function createDeck() {
     const deck = {
