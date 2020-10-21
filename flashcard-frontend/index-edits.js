@@ -130,12 +130,14 @@ function renderFlashcard(card) {
     //attachClickToCardLinks()
 }
 
-function attachClickToCardLinks() {
-    let cards = document.querySelectorAll(" a")
-    cards.forEach(card => {
-        card.addEventListener('click', renderBack)
-    })
-}
+// function attachClickToCardLinks() {
+//     let cards = document.querySelectorAll(" a")
+//     cards.forEach(card => {
+//         card.addEventListener('click', renderBack)
+//     })
+// }
+
+
 
 //delete route
 function removeDeck(id) {
