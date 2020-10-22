@@ -298,7 +298,6 @@ function removeCard(id) {
 
 
 function editCard(id) {
-    //console.log(id);
     //clearForm();
     fetch(MAIN_URL + `/cards/${id}`)
         .then(resp => resp.json())
@@ -310,17 +309,13 @@ function editCard(id) {
             <input type ="text" id="card_front" value="${card.card_front}"></br>
             <label>Flashcard Back:</label>
             <input type ="text" id="card_back" value="${card.card_back}"></br>
-        
-        
             <input type ="submit" value="Submit Edit">
         `
             cardFormDiv.innerHTML = html;
         })
 }
 
-//update flashcard function
-
-//patch to update route
+//patch to update route - flashcards
 function updateCard(id) {
     //console.log(id);
     const card = {
@@ -345,9 +340,6 @@ function updateCard(id) {
                 <button data-id=${card.id} onclick="editDeck(${card.id})"; return false;>Edit</button>
                 <button data-id=${card.id} onclick="removeDeck(${card.id})"; return false;>Delete</button>
                 `
-
-
-                //attachClickToDeckLinks();
                 //clearForm();
             }
 
