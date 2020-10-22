@@ -56,32 +56,6 @@ function displayCreateForm() {
 
 }
 
-/* this function will need to pull deck id
-so flashcard is assigned to correct deck*/
-function displayCreateCardForm() {
-    let cardFormDiv = document.getElementById("card-form");
-    let html = `
-        <form onsubmit="createCard(); return false;">
-        <label>Flashcard Front</label>
-        <input type="text" id="card_front">
-        <label>Flashcard Back</label>
-        <input type="text" id="card_back">
-        <input type="submit" value="Create New FlashCard">    
-    `
-    cardFormDiv.innerHTML = html;
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
-}
-
 //post - create
 function createDeck() {
     const deck = {
@@ -117,13 +91,6 @@ function createDeck() {
         })
 }
 
-//post - create for flashcard
-function createFlashcard() {
-    const card = {
-        name: document.getElementById("name").value,
-       
-        })
-}
 
 //get - show route
 function displayDeck(event) {
@@ -171,28 +138,7 @@ function renderFlashcard(card) {
 //     })
 // }
 
-function editCard(id) {
-    console.log(id);
-    //clearForm();
-    fetch(MAIN_URL + `/cards/${id}`)
-        .then(resp => resp.json())
-        .then(card => {
-            let cardFormDiv = document.getElementById("card-form")
-            let html = `
-            <form onsubmit="updateCard(${card.id});return false;">
-            <label>Topic Name:</label>
-            <input type ="text" id="name" value="${card.deck.name}"></br>
-            <label>Flashcard Front:</label>
-            <input type ="text" id="card_front" value="${card.card_front}"></br>
-            <label>Flashcard Back:</label>
-            <input type ="text" id="card_back" value="${card.card_back}"></br>
-        
-        
-            <input type ="submit" value="Submit Edit">
-        `
-            cardFormDiv.innerHTML = html;
-        })
-}
+
 
 
 //delete route
@@ -268,3 +214,110 @@ class Deck {
         `
     }
 }
+
+/* ALL FLASHCARD CODE */
+
+/* this function will need to pull deck id
+so flashcard is assigned to correct deck*/
+function displayCreateCardForm() {
+    let cardFormDiv = document.getElementById("card-form");
+    let html = `
+        <form onsubmit="createFlashcard(); return false;">
+        <label>Flashcard Front</label>
+        <input type="text" id="card_front">
+        <label>Flashcard Back</label>
+        <input type="text" id="card_back">
+        <input type="submit" value="Create New FlashCard">    
+    `
+    cardFormDiv.innerHTML = html;
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
+    // <p><label>Question</label>
+    // <input type="text" id="cards[question]">
+    // <label>Answer</label>
+    // <input type="text" id="cards[answer]"></p>
+
+}
+
+//post - create for flashcard
+// function createFlashcard() {
+//    const card = {
+//         card_front: document.getElementById("card_front").value,
+//         card_back: document.getElementById("card_back").value,
+//         // cards: [{
+//         //     question: document.getElementById("cards[question]").value,
+//         //     answer: document.getElementById("cards[answer]").value,
+
+//         // }]
+
+//     }
+//     console.log(card);
+//     // fetch(MAIN_URL + "/decks", {
+//     //         method: "POST",
+//     //         body: JSON.stringify(deck),
+//     //         headers: {
+//     //             "Content-Type": "application/json",
+//     //             "Accept": "application/json"
+//     //         }
+//     //     })
+//     //     .then(resp => resp.json())
+//     //     .then(deck => {
+//     //         let deckInstance = new Deck(deck)
+//     //         document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
+
+//     //         //document.querySelector("#main-list ul").innerHTML += `
+//     //         //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
+//     //         //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+//     //         //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
+//     //         //`
+
+//     //         attachClickToDeckLinks();
+//     //         clearForm();
+//     //     })
+// }
+
+
+//delete flashcard function
+function removeCard(id) {
+    //clearCardForm();
+    console.log(id);
+    fetch(MAIN_URL + `/cards/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        //console.log(event.target.offsetParent);
+        .then(event.target.offsetParent.remove());
+}
+
+
+function editCard(id) {
+    console.log(id);
+    //clearForm();
+    fetch(MAIN_URL + `/cards/${id}`)
+        .then(resp => resp.json())
+        .then(card => {
+            let cardFormDiv = document.getElementById("card-form")
+            let html = `
+            <form onsubmit="updateCard(${card.id});return false;">
+            <label>Topic Name:</label>
+            <input type ="text" id="name" value="${card.deck.name}"></br>
+            <label>Flashcard Front:</label>
+            <input type ="text" id="card_front" value="${card.card_front}"></br>
+            <label>Flashcard Back:</label>
+            <input type ="text" id="card_back" value="${card.card_back}"></br>
+        
+        
+            <input type ="submit" value="Submit Edit">
+        `
+            cardFormDiv.innerHTML = html;
+        })
+}
+
+//update flashcard function
