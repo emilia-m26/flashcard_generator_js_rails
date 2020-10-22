@@ -306,8 +306,6 @@ function editCard(id) {
             let cardFormDiv = document.getElementById("card-form")
             let html = `
             <form onsubmit="updateCard(${card.id});return false;">
-            <label>Topic Name:</label>
-            <input type ="text" id="name" value="${card.deck.name}"></br>
             <label>Flashcard Front:</label>
             <input type ="text" id="card_front" value="${card.card_front}"></br>
             <label>Flashcard Back:</label>
@@ -328,9 +326,6 @@ function updateCard(id) {
     const card = {
         card_front: document.getElementById("card_front").value,
         card_back: document.getElementById("card_back").value,
-        deck: {
-            name: document.getElementById("name").value,
-        }
     }
     fetch(MAIN_URL + `/cards/${id}`, {
             method: "PATCH",
@@ -343,22 +338,18 @@ function updateCard(id) {
         .then(resp => resp.json())
 
         console.log(card)
-        // .then(card => {
-        //         document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-        //         <a href="#" data-id="${card.id}">${card.deck.name}</a>
-        //         <label>Topic Name:</label>
-        //         <input type ="text" id="name" value="${card.deck.name}"></br>
-        //         <label>Flashcard Front:</label>
-        //         <input type ="text" id="card_front" value="${card.card_front}"></br>
-        //         <label>Flashcard Back:</label>
-        //         <input type ="text" id="card_back" value="${card.card_back}"></br>
-        //         <button data-id=${card.id} onclick="editCard(${card.id})"; return false;>Edit</button>
-        //         <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button>
-        //         `
+        .then(card => {
+                document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
+                <a href="#" data-id="${card.card_front}">${card.card_front}</a>
+                <a href="#" data-id="${card.card_back}">${card.card_back}</a>
+                <button data-id=${card.id} onclick="editDeck(${card.id})"; return false;>Edit</button>
+                <button data-id=${card.id} onclick="removeDeck(${card.id})"; return false;>Delete</button>
+                `
 
-        //         //attachClickToDeckLinks();
-        //         clearForm();
-        //     }
 
-        //)
+                //attachClickToDeckLinks();
+                //clearForm();
+            }
+
+        )
 }
