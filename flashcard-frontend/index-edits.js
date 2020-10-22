@@ -117,6 +117,14 @@ function createDeck() {
         })
 }
 
+//post - create for flashcard
+function createFlashcard() {
+    const card = {
+        name: document.getElementById("name").value,
+       
+        })
+}
+
 //get - show route
 function displayDeck(event) {
     //console.log(event)
