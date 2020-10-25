@@ -133,8 +133,6 @@ function renderFlashcard(card) {
     const cardInfo = document.querySelector("#flashcard-list");
     //below displays card
     cardInfo.innerHTML += `
-    
-
     <div class="flipCard">
         <div class="card" onclick="this.classList.toggle('flipped');">
             <div class="side front">${card.card_front}</div>
@@ -307,7 +305,7 @@ function displayCreateCardForm() {
 //delete flashcard function
 function removeCard(id) {
     //clearCardForm();
-    console.log(id);
+    //console.log(id);
     fetch(MAIN_URL + `/cards/${id}`, {
             method: "DELETE",
             headers: {
