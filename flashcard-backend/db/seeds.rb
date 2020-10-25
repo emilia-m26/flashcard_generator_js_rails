@@ -11,13 +11,13 @@ Deck.create(name: "Hawaiian") #deck 1
 Deck.create(name: "Portuguese") #deck 2
 Deck.create(name: "Spanish") #deck 3
 
-Card.create(deck_id: 1, card_front: "O'hana", card_back: "Family", category: "Family")
+Card.create(deck_id: 1, card_front: "'Ohana", card_back: "Family", category: "Family")
 Card.create(deck_id: 1, card_front: "Makuahine", card_back: "Mother", category: "Family")
 Card.create(deck_id: 1, card_front: "Makuakāne", card_back: "Father", category: "Family")
 Card.create(deck_id: 1, card_front: "Aloha", card_back: "Hello", category: "Intro")
 Card.create(deck_id: 1, card_front: "Aloha", card_back: "Farewell", category: "Intro")
 
-Card.create(deck_id: 2, card_front: "Familia", card_back: "Family", category: "Family")
+Card.create(deck_id: 2, card_front: "Família", card_back: "Family", category: "Family")
 Card.create(deck_id: 2, card_front: "Mãe", card_back: "Mother", category: "Family")
 Card.create(deck_id: 2, card_front: "Pai", card_back: "Father", category: "Family")
 Card.create(deck_id: 2, card_front: "Olá", card_back: "Hello", category: "Intro")
