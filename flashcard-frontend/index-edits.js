@@ -7,19 +7,6 @@ window.addEventListener('load', () => {
        
 })
 
-function displayForms() {
-    let main = document.querySelector("#deck-list ul")
-    let deckFormDisplay = document.querySelector('#deck-create-form');
-    let cardFormDisplay = document.querySelector('#card-create-form');
-    if (main.style.visibility === "visible") {
-      deckFormDisplay.style.visibility = "visible";
-      cardFormDisplay.style.visibility = "hidden";
-    } else {
-      deckFormDisplay.style.visibility = "hidden";
-      cardFormDisplay.style.visibility = "visible";
-    }
-    
-}
 
 //get - index
 function getDecks() {
@@ -35,7 +22,10 @@ function getDecks() {
             }).join("");
             attachClickToDeckLinks();
             main.style = "visibility: visible;";
-            displayForms();
+            setTimeout(() => {
+                displayForms();
+            }, 0.2);
+            
         })
 }
 
@@ -49,6 +39,20 @@ function attachClickToDeckLinks() {
     decks.forEach(deck => {
         deck.addEventListener('click', displayDeck)
     });
+}
+
+function displayForms() {
+    let main = document.querySelector("#deck-list ul")
+    let deckFormDisplay = document.querySelector('#deck-create-form');
+    let cardFormDisplay = document.querySelector('#card-create-form');
+    if (main.style.visibility === "visible") {
+      deckFormDisplay.style.visibility = "visible";
+      cardFormDisplay.style.visibility = "hidden";
+    } else {
+      deckFormDisplay.style.visibility = "hidden";
+      cardFormDisplay.style.visibility = "visible";
+    }
+    
 }
 
 function displayCreateForm() {
@@ -232,6 +236,7 @@ class Deck {
          
         `
     }
+   
 }
 
 /* ALL FLASHCARD CODE */
