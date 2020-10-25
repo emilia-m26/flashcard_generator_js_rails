@@ -4,12 +4,27 @@ window.addEventListener('load', () => {
     getDecks();
         //attachClickToDeckLinks()
         //displayCreateForm()
+       
 })
+
+function displayForms() {
+    let main = document.querySelector("#deck-list ul")
+    let deckFormDisplay = document.querySelector('#deck-create-form');
+    let cardFormDisplay = document.querySelector('#card-create-form');
+    if (main.style.visibility === "visible") {
+      deckFormDisplay.style.visibility = "visible";
+      cardFormDisplay.style.visibility = "hidden";
+    } else {
+      deckFormDisplay.style.visibility = "hidden";
+      cardFormDisplay.style.visibility = "visible";
+    }
+    
+}
 
 //get - index
 function getDecks() {
     clearForm();
-    let main = document.querySelector("#deck-list ul")
+    let main = document.querySelector("#deck-list ul");
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
@@ -19,6 +34,8 @@ function getDecks() {
                     //return string and put into new array with map, then returns new array filled with string then need to join
             }).join("");
             attachClickToDeckLinks();
+            main.style = "visibility: visible;";
+            displayForms();
         })
 }
 
@@ -99,7 +116,7 @@ function displayDeck(event) {
     clearForm();
     let id = this.dataset.id;
     let main = document.querySelector("#deck-list ul");
-    main.innerHTML = ""
+    main.style = "visibility: hidden;"
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
         .then(deck => {
@@ -129,6 +146,8 @@ function renderFlashcard(card) {
     
     `
     //attachClickToCardLinks()
+    cardInfo.style = "visibility: visible;";
+    displayForms();
 }
 
 // function attachClickToCardLinks() {
