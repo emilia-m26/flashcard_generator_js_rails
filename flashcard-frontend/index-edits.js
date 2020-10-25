@@ -356,8 +356,6 @@ function updateCard(id) {
             body: JSON.stringify(card)
         })
         .then(resp => resp.json())
-
-        console.log(card)
         .then(card => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
                 <a href="#" data-id="${card.card_front}">${card.card_front}</a>
