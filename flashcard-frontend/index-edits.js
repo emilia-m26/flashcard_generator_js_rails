@@ -164,6 +164,7 @@ function renderFlashcard(card) {
 //delete route
 function removeDeck(id) {
     clearForm();
+   if (confirm ('Are you sure you want to delete the deck? This is irreversible.')) {
     fetch(MAIN_URL + `/decks/${id}`, {
             method: "DELETE",
             headers: {
@@ -172,6 +173,7 @@ function removeDeck(id) {
             }
         })
         .then(event.target.parentElement.remove());
+    }
 }
 
 function editDeck(id) {
@@ -306,6 +308,7 @@ function displayCreateCardForm() {
 function removeCard(id) {
     //clearCardForm();
     //console.log(id);
+    if (confirm ('Are you sure you want to delete the flashcard? This is irreversible.')) {
     fetch(MAIN_URL + `/cards/${id}`, {
             method: "DELETE",
             headers: {
@@ -315,6 +318,7 @@ function removeCard(id) {
         })
         //console.log(event.target.offsetParent);
         .then(event.target.offsetParent.remove());
+    }
 }
 
 
