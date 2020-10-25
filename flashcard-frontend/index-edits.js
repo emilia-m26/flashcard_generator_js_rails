@@ -22,10 +22,7 @@ function getDecks() {
             }).join("");
             attachClickToDeckLinks();
             main.style = "visibility: visible;";
-            setTimeout(() => {
-                displayForms();
-            }, 0.2);
-            
+            displayForms();
         })
 }
 
@@ -45,6 +42,8 @@ function displayForms() {
     let main = document.querySelector("#deck-list ul")
     let deckFormDisplay = document.querySelector('#deck-create-form');
     let cardFormDisplay = document.querySelector('#card-create-form');
+    deckFormDisplay.style.visibility = "hidden";
+    cardFormDisplay.style.visibility = "hidden";
     if (main.style.visibility === "visible") {
       deckFormDisplay.style.visibility = "visible";
       cardFormDisplay.style.visibility = "hidden";
