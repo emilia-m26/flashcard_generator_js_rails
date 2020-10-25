@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
 //get - index
 function getDecks() {
     clearForm();
-    let main = document.querySelector("#main-list ul")
+    let main = document.querySelector("#deck-list ul")
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
@@ -98,7 +98,7 @@ function displayDeck(event) {
     event.preventDefault();
     clearForm();
     let id = this.dataset.id;
-    let main = document.querySelector("#main-list ul");
+    let main = document.querySelector("#deck-list ul");
     main.innerHTML = ""
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
@@ -110,7 +110,7 @@ function displayDeck(event) {
 }
 
 function renderFlashcard(card) {
-    const cardInfo = document.querySelector("#main-list ul");
+    const cardInfo = document.querySelector("#flashcard-list");
     //below displays card
     cardInfo.innerHTML += `
     
