@@ -6,7 +6,7 @@
 }
 
 .flipCard .card .front {
-    font-family: Georgia;
+    /*font-family: Georgia;*/
     font-size: 3em;
     text-align: center;
     line-height: 160px;
@@ -16,7 +16,7 @@
 }
 
 .flipCard .card .back {
-    font-family: Georgia;
+    /*font-family: Georgia;*/
     font-size: 3em;
     text-align: center;
     line-height: 160px;

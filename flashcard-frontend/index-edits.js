@@ -144,6 +144,7 @@ function renderFlashcard(card) {
             <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button></li>
         </div>
     </div>
+    <br>
     
     `
     //attachClickToCardLinks()
