@@ -232,7 +232,8 @@ class Deck {
         <li>
         <a href="#" data-id="${this.id}">${this.name}</a>
         <button data-id=${this.id} onclick="editDeck(${this.id})"; return false;>Edit</button>
-        <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button></li>
+        <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button>
+        </li>
          
         `
     }

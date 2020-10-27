@@ -39,6 +39,11 @@ body {
     background-color: coral;
 }
 
+#deck-list li {
+    list-style-type: none;
+    border: 1px solid black;
+}
+
 .footer {
     position: fixed;
     left: 0;
