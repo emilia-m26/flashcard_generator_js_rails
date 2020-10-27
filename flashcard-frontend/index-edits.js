@@ -210,9 +210,16 @@ function updateDeck(id) {
         .then(resp => resp.json())
         .then(deck => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
+                <div class="deck">
+                <img src="images/cards.jpg" alt="Avatar" style="width:100%">
+                <div class="container">
                 <a href="#" data-id="${deck.id}">${deck.name}</a>
+                <p>
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
+                </p>
+                </div>
+                </div>
                 `
                 attachClickToDeckLinks();
                 clearForm();
@@ -230,12 +237,20 @@ class Deck {
     renderDeck() {
         return `
         <li>
+        <div class="deck">
+        <img src="images/cards.jpg" alt="Avatar" style="width:100%">
+        <div class="container">
         <a href="#" data-id="${this.id}">${this.name}</a>
+        <p>
         <button data-id=${this.id} onclick="editDeck(${this.id})"; return false;>Edit</button>
         <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button>
+        </p>
+        </div>
+        </div>
         </li>
          
         `
+
     }
    
 }
