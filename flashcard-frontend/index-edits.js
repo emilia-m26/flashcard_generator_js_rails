@@ -137,6 +137,7 @@ function renderFlashcard(card) {
         <div class="card" onclick="this.classList.toggle('flipped');">
             <div class="side front">${card.card_front}</div>
             <div class="side back">${card.card_back}</div>
+            <div deck_id="${card.deck_id}"></div>
         </div>
         <br>
         <div class=buttons>
@@ -148,6 +149,8 @@ function renderFlashcard(card) {
     
     `
     //attachClickToCardLinks()
+    //console.log(cardInfo)
+
     cardInfo.style = "visibility: visible;";
     displayForms();
 }
@@ -263,58 +266,49 @@ function displayCreateCardForm() {
         <input type="text" id="card_front">
         <label>Flashcard Back</label>
         <input type="text" id="card_back">
+        <input type="hidden" id="deck_id" name="deck_id" value="12345">
         <input type="submit" value="Create New FlashCard">    
     `
     cardFormDiv.innerHTML = html;
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
 }
 
 //post - create for flashcard
-// function createFlashcard() {
-//    const card = {
-//         card_front: document.getElementById("card_front").value,
-//         card_back: document.getElementById("card_back").value,
-//         // cards: [{
-//         //     question: document.getElementById("cards[question]").value,
-//         //     answer: document.getElementById("cards[answer]").value,
+//need to take in an id to identify which deck it is for?
+function createFlashcard() {
+   const card = {
+        card_front: document.getElementById("card_front").value,
+        card_back: document.getElementById("card_back").value,
+        deck_id: document.getElementById("deck_id").value,
+    }
+    
+    console.log(card);
 
-//         // }]
+    fetch(MAIN_URL + "/cards", {
+            method: "POST",
+            body: JSON.stringify(card),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then (card => {
+            console.log(card)
+        })
+    //     .then(deck => {
+    //         let deckInstance = new Deck(deck)
+    //         document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
 
-//     }
-//     console.log(card);
-//     // fetch(MAIN_URL + "/decks", {
-//     //         method: "POST",
-//     //         body: JSON.stringify(deck),
-//     //         headers: {
-//     //             "Content-Type": "application/json",
-//     //             "Accept": "application/json"
-//     //         }
-//     //     })
-//     //     .then(resp => resp.json())
-//     //     .then(deck => {
-//     //         let deckInstance = new Deck(deck)
-//     //         document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
+    //         //document.querySelector("#main-list ul").innerHTML += `
+    //         //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
+    //         //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+    //         //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
+    //         //`
 
-//     //         //document.querySelector("#main-list ul").innerHTML += `
-//     //         //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
-//     //         //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-//     //         //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
-//     //         //`
-
-//     //         attachClickToDeckLinks();
-//     //         clearForm();
-//     //     })
-// }
+    //         attachClickToDeckLinks();
+    //         clearForm();
+    //     })
+}
 
 
 //delete flashcard function
