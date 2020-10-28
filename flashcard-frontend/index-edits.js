@@ -38,7 +38,7 @@ function attachClickToDeckLinks() {
     });
 }
 
-function displayForms() {
+function displayForms(deck_id) {
     let main = document.querySelector("#deck-list ul")
     let deckFormDisplay = document.querySelector('#deck-create-form');
     let cardFormDisplay = document.querySelector('#card-create-form');
@@ -50,6 +50,7 @@ function displayForms() {
     } else {
       deckFormDisplay.style.visibility = "hidden";
       cardFormDisplay.style.visibility = "visible";
+      displayCreateCardForm(deck_id);
     }
     
 }
@@ -152,7 +153,8 @@ function renderFlashcard(card) {
     //console.log(cardInfo)
 
     cardInfo.style = "visibility: visible;";
-    displayForms();
+    //console.log(card.deck_id)
+    displayForms(card.deck_id);
 }
 
 // function attachClickToCardLinks() {
@@ -258,7 +260,7 @@ class Deck {
 
 /* this function will need to pull deck id
 so flashcard is assigned to correct deck*/
-function displayCreateCardForm() {
+function displayCreateCardForm(deck_id) {
     let cardFormDiv = document.getElementById("card-form");
     let html = `
         <form onsubmit="createFlashcard(); return false;">
@@ -266,10 +268,12 @@ function displayCreateCardForm() {
         <input type="text" id="card_front">
         <label>Flashcard Back</label>
         <input type="text" id="card_back">
-        <input type="hidden" id="deck_id" name="deck_id" value="12345">
+        <input type="hidden" id="deck_id" name="deck_id" value="${deck_id}">
         <input type="submit" value="Create New FlashCard">    
     `
     cardFormDiv.innerHTML = html;
+
+    console.log(cardFormDiv)
 }
 
 //post - create for flashcard
