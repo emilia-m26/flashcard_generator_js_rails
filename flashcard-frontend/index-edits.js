@@ -38,7 +38,7 @@ function attachClickToDeckLinks() {
     });
 }
 
-function displayForms(deck_id) {
+function displayForms() {
     let main = document.querySelector("#deck-list ul")
     let deckFormDisplay = document.querySelector('#deck-create-form');
     let cardFormDisplay = document.querySelector('#card-create-form');
@@ -50,7 +50,6 @@ function displayForms(deck_id) {
     } else {
       deckFormDisplay.style.visibility = "hidden";
       cardFormDisplay.style.visibility = "visible";
-      displayCreateCardForm(deck_id);
     }
     
 }
@@ -153,8 +152,9 @@ function renderFlashcard(card) {
     //console.log(cardInfo)
 
     cardInfo.style = "visibility: visible;";
+    //displayForms(card.deck_id); -- allows FC form to show 
     //console.log(card.deck_id)
-    displayForms(card.deck_id);
+    //displayCreateCardForm(card.deck_id); -- makes FC form not show
 }
 
 // function attachClickToCardLinks() {
@@ -273,7 +273,7 @@ function displayCreateCardForm(deck_id) {
     `
     cardFormDiv.innerHTML = html;
 
-    console.log(cardFormDiv)
+    //console.log(cardFormDiv)
 }
 
 //post - create for flashcard
@@ -287,18 +287,18 @@ function createFlashcard() {
     
     console.log(card);
 
-    fetch(MAIN_URL + "/cards", {
-            method: "POST",
-            body: JSON.stringify(card),
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
-        .then(resp => resp.json())
-        .then (card => {
-            console.log(card)
-        })
+    // fetch(MAIN_URL + "/cards", {
+    //         method: "POST",
+    //         body: JSON.stringify(card),
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Accept": "application/json"
+    //         }
+    //     })
+    //     .then(resp => resp.json())
+    //     .then (card => {
+    //         console.log(card)
+    //     })
     //     .then(deck => {
     //         let deckInstance = new Deck(deck)
     //         document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
