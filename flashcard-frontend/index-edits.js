@@ -98,8 +98,8 @@ function createDeck() {
         .then(resp => resp.json())
         .then(deck => {
             let deckInstance = new Deck(deck)
-            document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
-
+            document.querySelector("#deck-list ul").innerHTML += deckInstance.renderDeck();
+            //console.log(deckInstance);
             //document.querySelector("#main-list ul").innerHTML += `
             //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
             //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
@@ -210,13 +210,13 @@ function updateDeck(id) {
         .then(resp => resp.json())
         .then(deck => {
                 document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-                
+                <li>
                 <a href="#" data-id="${deck.id}">${deck.name}</a>
                 <p>
                 <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
                 <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
                 </p>
-                
+                </li>
                 `
                 attachClickToDeckLinks();
                 clearForm();
@@ -244,8 +244,7 @@ class Deck {
         </p>
         </div>
         </div>
-        </li>
-         
+         </li>
         `
 
     }
