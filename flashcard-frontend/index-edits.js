@@ -75,20 +75,20 @@ function createDeck() {
         name: document.getElementById("name").value,
     }
     fetch(MAIN_URL + "/decks", {
-            method: "POST",
-            body: JSON.stringify(deck),
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
-        .then(resp => resp.json())
-        .then(deck => {
-            let deckInstance = new Deck(deck)
-            document.querySelector("#deck-list ul").innerHTML += deckInstance.renderDeck();
-            attachClickToDeckLinks();
-            clearForm();
-        })
+        method: "POST",
+        body: JSON.stringify(deck),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    })
+    .then(resp => resp.json())
+    .then(deck => {
+        let deckInstance = new Deck(deck)
+        document.querySelector("#deck-list ul").innerHTML += deckInstance.renderDeck();
+        attachClickToDeckLinks();
+        clearForm();
+    })
 }
 
 
@@ -118,7 +118,7 @@ function renderFlashcardNoCards(id) {
     let cardInfo = document.querySelector("#flashcard-list");
     cardInfo.innerHTML += `
     <div id="deck_id" value="${id}" style="visibility: hidden;">${id}</div>
-`
+    `
 }
 
 function renderFlashcard(card) {
@@ -138,23 +138,18 @@ function renderFlashcard(card) {
         </div>
     </div>
     <br>
-    
     `
 }
-
-
-
-
 
 //delete route
 function removeDeck(id) {
     clearForm();
-   if (confirm ('Are you sure you want to delete the deck? This is irreversible.')) {
+    if (confirm ('Are you sure you want to delete the deck? This is irreversible.')) {
     fetch(MAIN_URL + `/decks/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
             }
         })
         .then(event.target.parentElement.parentElement.parentElement.remove());
@@ -173,7 +168,7 @@ function editDeck(id) {
             <input type ="text" id="name" value="${deck.name}">
             </br>
             <input type ="submit" value="Submit Edit">
-        `
+            `
             deckFormDiv.innerHTML = html;
         })
 }
@@ -184,29 +179,28 @@ function updateDeck(id) {
         name: document.getElementById("name").value,
     }
     fetch(MAIN_URL + `/decks/${id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(deck)
-        })
-        .then(resp => resp.json())
-        .then(deck => {
-                document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-                <li>
-                <a href="#" data-id="${deck.id}">${deck.name}</a>
-                <p>
-                <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-                <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
-                </p>
-                </li>
-                `
-                attachClickToDeckLinks();
-                clearForm();
-            }
-
-        )
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(deck)
+    })
+    .then(resp => resp.json())
+    .then(deck => {
+        document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
+            <li>
+            <a href="#" data-id="${deck.id}">${deck.name}</a>
+            <p>
+            <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
+            <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
+            </p>
+            </li>
+            `
+        attachClickToDeckLinks();
+        clearForm();
+        }
+     )
 }
 
 //OOJS
@@ -230,7 +224,6 @@ class Deck {
         </div>
          </li>
         `
-
     }
    
 }
@@ -258,10 +251,8 @@ class Card {
         </div>
     </div>
     <br>
-        `
-
+    `
     }
-   
 }
 
 /* ALL FLASHCARD CODE */
@@ -281,9 +272,6 @@ function displayCreateCardForm() {
         <input type="submit" value="Create New FlashCard">    
     `
     cardFormDiv.innerHTML = html;
-
-    console.log(cardFormDiv)
-    console.log(deckID)
 }
 
 //post - create for flashcard
@@ -295,19 +283,19 @@ function createFlashcard() {
         category: document.getElementById("category").value,
     }
     fetch(MAIN_URL + "/cards", {
-            method: "POST",
-            body: JSON.stringify(card),
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
-        .then(resp => resp.json())
-        .then (card => {
-           let cardInstance = new Card(card)
-           document.querySelector("#flashcard-list").innerHTML += cardInstance.renderFlashcard();
-        })
-        clearForm();
+        method: "POST",
+        body: JSON.stringify(card),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    })
+    .then(resp => resp.json())
+    .then (card => {
+        let cardInstance = new Card(card)
+        document.querySelector("#flashcard-list").innerHTML += cardInstance.renderFlashcard();
+    })
+    clearForm();
 }
 
 
@@ -316,16 +304,15 @@ function removeCard(id) {
     //clearCardForm();
     if (confirm ('Are you sure you want to delete the flashcard? This is irreversible.')) {
     fetch(MAIN_URL + `/cards/${id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
-        .then(event.target.offsetParent.remove());
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    })
+    .then(event.target.offsetParent.remove());
     }
 }
-
 
 function editCard(id) {
     //clearForm();
@@ -341,8 +328,8 @@ function editCard(id) {
             <input type ="text" id="card_back" value="${card.card_back}"></br>
             <input type ="submit" value="Submit Edit">
         `
-            cardFormDiv.innerHTML = html;
-        })
+        cardFormDiv.innerHTML = html;
+    })
 }
 
 //patch to update route - flashcards
@@ -352,33 +339,28 @@ function updateCard(id) {
         card_back: document.getElementById("card_back").value,
     }
     fetch(MAIN_URL + `/cards/${id}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(card)
-        })
-        .then(resp => resp.json())
-        .then(card => {
-                document.querySelectorAll(`.flipCard .buttons button[data-id="${card.id}"]`)[0].parentElement.parentElement.innerHTML = 
-                `
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(card)
+    })
+    .then(resp => resp.json())
+    .then(card => {
+        document.querySelectorAll(`.flipCard .buttons button[data-id="${card.id}"]`)[0].parentElement.parentElement.innerHTML = `
             <div class="card" onclick="this.classList.toggle('flipped');">
                 <div class="side front">${card.card_front}</div>
                 <div class="side back">${card.card_back}</div>
                 <div id="deck_id" value="${card.deck_id}" style="visibility: hidden;">${card.deck_id}</div>
             </div>
-                <br>
+            <br>
             <div class=buttons>
                 <button data-id=${card.id} onclick="editCard(${card.id})"; return false;>Edit</button>
                 <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button>
-            </div>
-                   
+            </div>       
                 `
-            
-                clearForm();
-            }
-
-        )
+        clearForm();
+    })
 }
 
