@@ -137,7 +137,7 @@ function renderFlashcard(card) {
         <div class="card" onclick="this.classList.toggle('flipped');">
             <div class="side front">${card.card_front}</div>
             <div class="side back">${card.card_back}</div>
-            <div deck_id="${card.deck_id}"></div>
+            <div id="deck_id" value="${card.deck_id}" style="visibility: hidden;">${card.deck_id}</div>
         </div>
         <br>
         <div class=buttons>
@@ -149,9 +149,10 @@ function renderFlashcard(card) {
     
     `
     //attachClickToCardLinks()
-    //console.log(cardInfo)
+    //console.log(cardInfo) --shows deck_id
 
     cardInfo.style = "visibility: visible;";
+    displayForms(); //keep because this allows card form link to show
     //displayForms(card.deck_id); -- allows FC form to show 
     //console.log(card.deck_id)
     //displayCreateCardForm(card.deck_id); -- makes FC form not show
@@ -260,20 +261,22 @@ class Deck {
 
 /* this function will need to pull deck id
 so flashcard is assigned to correct deck*/
-function displayCreateCardForm(deck_id) {
+function displayCreateCardForm() {
     let cardFormDiv = document.getElementById("card-form");
+    let deckID = document.getElementById("deck_id").innerHTML;
     let html = `
         <form onsubmit="createFlashcard(); return false;">
         <label>Flashcard Front</label>
         <input type="text" id="card_front">
         <label>Flashcard Back</label>
         <input type="text" id="card_back">
-        <input type="hidden" id="deck_id" name="deck_id" value="${deck_id}">
+        <input type="hidden" id="deck_id" name="deck_id" value="${deckID}">
         <input type="submit" value="Create New FlashCard">    
     `
     cardFormDiv.innerHTML = html;
 
-    //console.log(cardFormDiv)
+    console.log(cardFormDiv)
+    console.log(deckID)
 }
 
 //post - create for flashcard
