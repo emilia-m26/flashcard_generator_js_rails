@@ -28,7 +28,14 @@ function getDecks() {
 
 function clearForm() {
     let deckFormDiv = document.getElementById("deck-form");
-    deckFormDiv.innerHTML = ''
+    let cardFormDiv = document.getElementById("card-form");
+    let main = document.querySelector("#deck-list ul");
+     
+    if (main.style.visibility === "visible") {
+        deckFormDiv.innerHTML = ''
+    } else {
+        cardFormDiv.innerHTML = ''
+    }
 }
 
 function attachClickToDeckLinks() {
@@ -347,7 +354,7 @@ function createFlashcard() {
     //         //`
 
     //         attachClickToDeckLinks();
-    //         clearForm();
+           clearForm();
     //     })
 }
 
