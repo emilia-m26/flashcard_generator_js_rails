@@ -1,10 +1,7 @@
 const MAIN_URL = "http://localhost:3000";
 
 window.addEventListener('load', () => {
-    getDecks();
-        //attachClickToDeckLinks()
-        //displayCreateForm()
-       
+    getDecks();    
 })
 
 
@@ -70,29 +67,12 @@ function displayCreateForm() {
         <input type="submit" value="Create New Deck">    
     `
     deckFormDiv.innerHTML = html;
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
-    // <p><label>Question</label>
-    // <input type="text" id="cards[question]">
-    // <label>Answer</label>
-    // <input type="text" id="cards[answer]"></p>
-
 }
 
 //post - create
 function createDeck() {
     const deck = {
         name: document.getElementById("name").value,
-        // cards: [{
-        //     question: document.getElementById("cards[question]").value,
-        //     answer: document.getElementById("cards[answer]").value,
-
-        // }]
-
     }
     fetch(MAIN_URL + "/decks", {
             method: "POST",
@@ -106,13 +86,6 @@ function createDeck() {
         .then(deck => {
             let deckInstance = new Deck(deck)
             document.querySelector("#deck-list ul").innerHTML += deckInstance.renderDeck();
-            //console.log(deckInstance);
-            //document.querySelector("#main-list ul").innerHTML += `
-            //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
-            //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-            //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
-            //`
-
             attachClickToDeckLinks();
             clearForm();
         })
@@ -121,7 +94,6 @@ function createDeck() {
 
 //get - show route - pulling info for displaying flashcards
 function displayDeck(event) {
-    //console.log(event)
     event.preventDefault();
     clearForm();
     let id = this.dataset.id;
@@ -129,13 +101,10 @@ function displayDeck(event) {
     main.style = "visibility: hidden;"
     main.innerHTML = '';
     displayForms();
-    //console.log(main)
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
         .then(deck => {
             if(deck.cards.length === 0) {
-                //console.log(deck.cards.length)
-                //console.log(deck.id)
                 renderFlashcardNoCards(deck.id)
             } else {
             for (const card of deck.cards) {
@@ -154,8 +123,6 @@ function renderFlashcardNoCards(id) {
 
 function renderFlashcard(card) {
     let cardInfo = document.querySelector("#flashcard-list");
-    //console.log(card)
-    //cardInfo.style = "visibility: visible;";
     //below displays card
     cardInfo.innerHTML += `
     <div class="flipCard">
@@ -173,22 +140,8 @@ function renderFlashcard(card) {
     <br>
     
     `
-    //attachClickToCardLinks()
-    //console.log(cardInfo) --shows deck_id
-
-    
-    //displayForms(); //keep because this allows card form link to show
-    //displayForms(card.deck_id); -- allows FC form to show 
-    //console.log(card.deck_id)
-    //displayCreateCardForm(card.deck_id); -- makes FC form not show
 }
 
-// function attachClickToCardLinks() {
-//     let cards = document.querySelectorAll(" a")
-//     cards.forEach(card => {
-//         card.addEventListener('click', renderBack)
-//     })
-// }
 
 
 
@@ -204,9 +157,7 @@ function removeDeck(id) {
                 "Accept": "application/json"
             }
         })
-        .then(
-            event.target.parentElement.parentElement.parentElement.remove());
-            //console.log(event.target.parentElement.parentElement.parentElement))
+        .then(event.target.parentElement.parentElement.parentElement.remove());
     }
 }
 
@@ -219,8 +170,8 @@ function editDeck(id) {
             let html = `
             <form onsubmit="updateDeck(${id});return false;">
             <label>Name:</label>
-            <input type ="text" id="name" value="${deck.name}"></br>
-        
+            <input type ="text" id="name" value="${deck.name}">
+            </br>
             <input type ="submit" value="Submit Edit">
         `
             deckFormDiv.innerHTML = html;
@@ -315,8 +266,6 @@ class Card {
 
 /* ALL FLASHCARD CODE */
 
-/* this function will need to pull deck id
-so flashcard is assigned to correct deck*/
 function displayCreateCardForm() {
     let cardFormDiv = document.getElementById("card-form");
     let deckID = document.getElementById("deck_id").innerHTML;
@@ -338,7 +287,6 @@ function displayCreateCardForm() {
 }
 
 //post - create for flashcard
-//need to take in an id to identify which deck it is for?
 function createFlashcard() {
    const card = {
         card_front: document.getElementById("card_front").value,
@@ -346,9 +294,6 @@ function createFlashcard() {
         deck_id: document.getElementById("deck_id").value,
         category: document.getElementById("category").value,
     }
-    
-    //console.log(card);
-
     fetch(MAIN_URL + "/cards", {
             method: "POST",
             body: JSON.stringify(card),
@@ -359,30 +304,16 @@ function createFlashcard() {
         })
         .then(resp => resp.json())
         .then (card => {
-            //console.log(card)
            let cardInstance = new Card(card)
            document.querySelector("#flashcard-list").innerHTML += cardInstance.renderFlashcard();
         })
-    //     .then(deck => {
-    //         let deckInstance = new Deck(deck)
-    //         document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
-
-    //         //document.querySelector("#main-list ul").innerHTML += `
-    //         //<li><a href="#" data-id="${deck.id}">${deck.name}</a>
-    //         //<button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
-    //         //<button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button></li>
-    //         //`
-
-    //         attachClickToDeckLinks();
-           clearForm();
-    //     })
+        clearForm();
 }
 
 
 //delete flashcard function
 function removeCard(id) {
     //clearCardForm();
-    //console.log(id);
     if (confirm ('Are you sure you want to delete the flashcard? This is irreversible.')) {
     fetch(MAIN_URL + `/cards/${id}`, {
             method: "DELETE",
@@ -391,7 +322,6 @@ function removeCard(id) {
                 "Accept": "application/json"
             }
         })
-        //console.log(event.target.offsetParent);
         .then(event.target.offsetParent.remove());
     }
 }
@@ -412,13 +342,11 @@ function editCard(id) {
             <input type ="submit" value="Submit Edit">
         `
             cardFormDiv.innerHTML = html;
-            //console.log(id)
         })
 }
 
 //patch to update route - flashcards
 function updateCard(id) {
-    //console.log(id);
     const card = {
         card_front: document.getElementById("card_front").value,
         card_back: document.getElementById("card_back").value,
@@ -433,9 +361,6 @@ function updateCard(id) {
         })
         .then(resp => resp.json())
         .then(card => {
-            console.log(card)
-                //document.querySelectorAll(`.card[data-id="${card.id}"]`)[0].parentElement.innerHTML = `
-                console.log(document.querySelectorAll(`.flipCard .buttons button[data-id="${card.id}"]`)[0].parentElement.parentElement);
                 document.querySelectorAll(`.flipCard .buttons button[data-id="${card.id}"]`)[0].parentElement.parentElement.innerHTML = 
                 `
             <div class="card" onclick="this.classList.toggle('flipped');">
