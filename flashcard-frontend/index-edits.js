@@ -204,7 +204,9 @@ function removeDeck(id) {
                 "Accept": "application/json"
             }
         })
-        .then(event.target.parentElement.remove());
+        .then(
+            event.target.parentElement.parentElement.parentElement.remove());
+            //console.log(event.target.parentElement.parentElement.parentElement))
     }
 }
 
@@ -455,13 +457,3 @@ function updateCard(id) {
         )
 }
 
-{/* <a href="#" data-id="${card.card_front}">${card.card_front}</a>
-                <a href="#" data-id="${card.card_back}">${card.card_back}</a>
-                <button data-id=${card.id} onclick="editDeck(${card.id})"; return false;>Edit</button>
-                <button data-id=${card.id} onclick="removeDeck(${card.id})"; return false;>Delete</button>
-                
-                
-                
-    <div class="flipCard">
-        
-    </div> */}
