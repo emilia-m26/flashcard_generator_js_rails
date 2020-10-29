@@ -119,7 +119,7 @@ function createDeck() {
 }
 
 
-//get - show route
+//get - show route - pulling info for displaying flashcards
 function displayDeck(event) {
     //console.log(event)
     event.preventDefault();
@@ -127,17 +127,35 @@ function displayDeck(event) {
     let id = this.dataset.id;
     let main = document.querySelector("#deck-list ul");
     main.style = "visibility: hidden;"
+    main.innerHTML = '';
+    displayForms();
+    //console.log(main)
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
         .then(deck => {
+            if(deck.cards.length === 0) {
+                //console.log(deck.cards.length)
+                //console.log(deck.id)
+                renderFlashcardNoCards(deck.id)
+            } else {
             for (const card of deck.cards) {
                 renderFlashcard(card);
             }
-        })
+        }
+    })
+}
+
+function renderFlashcardNoCards(id) {
+    let cardInfo = document.querySelector("#flashcard-list");
+    cardInfo.innerHTML += `
+    <div id="deck_id" value="${id}" style="visibility: hidden;">${id}</div>
+`
 }
 
 function renderFlashcard(card) {
-    const cardInfo = document.querySelector("#flashcard-list");
+    let cardInfo = document.querySelector("#flashcard-list");
+    //console.log(card)
+    //cardInfo.style = "visibility: visible;";
     //below displays card
     cardInfo.innerHTML += `
     <div class="flipCard">
@@ -158,8 +176,8 @@ function renderFlashcard(card) {
     //attachClickToCardLinks()
     //console.log(cardInfo) --shows deck_id
 
-    cardInfo.style = "visibility: visible;";
-    displayForms(); //keep because this allows card form link to show
+    
+    //displayForms(); //keep because this allows card form link to show
     //displayForms(card.deck_id); -- allows FC form to show 
     //console.log(card.deck_id)
     //displayCreateCardForm(card.deck_id); -- makes FC form not show
