@@ -167,7 +167,7 @@ function renderFlashcard(card) {
         <br>
         <div class=buttons>
             <button data-id=${card.id} onclick="editCard(${card.id})"; return false;>Edit</button>
-            <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button></li>
+            <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button>
         </div>
     </div>
     <br>
@@ -296,12 +296,12 @@ class Card {
         <div class="card" onclick="this.classList.toggle('flipped');">
             <div class="side front">${this.card_front}</div>
             <div class="side back">${this.card_back}</div>
-            <div id="deck_id" value="${this.deck_id}" style="visibility: hidden;">${this.deck_id}</div>
+            <div id="deck_id" data-id="${this.deck_id}" style="visibility: hidden;">${this.deck_id}</div>
         </div>
         <br>
         <div class=buttons>
             <button data-id=${this.id} onclick="editCard(${this.id})"; return false;>Edit</button>
-            <button data-id=${this.id} onclick="removeCard(${this.id})"; return false;>Delete</button></li>
+            <button data-id=${this.id} onclick="removeCard(${this.id})"; return false;>Delete</button>
         </div>
     </div>
     <br>
@@ -402,7 +402,7 @@ function editCard(id) {
         .then(card => {
             let cardFormDiv = document.getElementById("card-form")
             let html = `
-            <form onsubmit="updateCard(${card.id});return false;">
+            <form onsubmit="updateCard(${id});return false;">
             <label>Flashcard Front:</label>
             <input type ="text" id="card_front" value="${card.card_front}"></br>
             <label>Flashcard Back:</label>
@@ -410,6 +410,7 @@ function editCard(id) {
             <input type ="submit" value="Submit Edit">
         `
             cardFormDiv.innerHTML = html;
+            //console.log(id)
         })
 }
 
@@ -430,14 +431,37 @@ function updateCard(id) {
         })
         .then(resp => resp.json())
         .then(card => {
-                document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-                <a href="#" data-id="${card.card_front}">${card.card_front}</a>
-                <a href="#" data-id="${card.card_back}">${card.card_back}</a>
-                <button data-id=${card.id} onclick="editDeck(${card.id})"; return false;>Edit</button>
-                <button data-id=${card.id} onclick="removeDeck(${card.id})"; return false;>Delete</button>
+            console.log(card)
+                //document.querySelectorAll(`.card[data-id="${card.id}"]`)[0].parentElement.innerHTML = `
+                console.log(document.querySelectorAll(`.flipCard .buttons button[data-id="${card.id}"]`)[0].parentElement.parentElement);
+                document.querySelectorAll(`.flipCard .buttons button[data-id="${card.id}"]`)[0].parentElement.parentElement.innerHTML = 
                 `
-                //clearForm();
+            <div class="card" onclick="this.classList.toggle('flipped');">
+                <div class="side front">${card.card_front}</div>
+                <div class="side back">${card.card_back}</div>
+                <div id="deck_id" value="${card.deck_id}" style="visibility: hidden;">${card.deck_id}</div>
+            </div>
+                <br>
+            <div class=buttons>
+                <button data-id=${card.id} onclick="editCard(${card.id})"; return false;>Edit</button>
+                <button data-id=${card.id} onclick="removeCard(${card.id})"; return false;>Delete</button>
+            </div>
+                   
+                `
+            
+                clearForm();
             }
 
         )
 }
+
+{/* <a href="#" data-id="${card.card_front}">${card.card_front}</a>
+                <a href="#" data-id="${card.card_back}">${card.card_back}</a>
+                <button data-id=${card.id} onclick="editDeck(${card.id})"; return false;>Edit</button>
+                <button data-id=${card.id} onclick="removeDeck(${card.id})"; return false;>Delete</button>
+                
+                
+                
+    <div class="flipCard">
+        
+    </div> */}
