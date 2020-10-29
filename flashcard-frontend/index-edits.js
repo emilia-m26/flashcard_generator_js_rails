@@ -257,6 +257,35 @@ class Deck {
    
 }
 
+class Card {
+    constructor(card) {
+        this.id = card.id
+        this.card_front = card.card_front
+        this.card_back = card.card_back
+        this.category = card.category
+        this.deck_id = card.deck_id
+    }
+    renderFlashcard() {
+        return `
+        <div class="flipCard">
+        <div class="card" onclick="this.classList.toggle('flipped');">
+            <div class="side front">${this.card_front}</div>
+            <div class="side back">${this.card_back}</div>
+            <div id="deck_id" value="${this.deck_id}" style="visibility: hidden;">${this.deck_id}</div>
+        </div>
+        <br>
+        <div class=buttons>
+            <button data-id=${this.id} onclick="editCard(${this.id})"; return false;>Edit</button>
+            <button data-id=${this.id} onclick="removeCard(${this.id})"; return false;>Delete</button></li>
+        </div>
+    </div>
+    <br>
+        `
+
+    }
+   
+}
+
 /* ALL FLASHCARD CODE */
 
 /* this function will need to pull deck id
@@ -270,6 +299,8 @@ function displayCreateCardForm() {
         <input type="text" id="card_front">
         <label>Flashcard Back</label>
         <input type="text" id="card_back">
+        <label>Flashcard Category</label>
+        <input type="text" id="category">
         <input type="hidden" id="deck_id" name="deck_id" value="${deckID}">
         <input type="submit" value="Create New FlashCard">    
     `
@@ -286,22 +317,25 @@ function createFlashcard() {
         card_front: document.getElementById("card_front").value,
         card_back: document.getElementById("card_back").value,
         deck_id: document.getElementById("deck_id").value,
+        category: document.getElementById("category").value,
     }
     
-    console.log(card);
+    //console.log(card);
 
-    // fetch(MAIN_URL + "/cards", {
-    //         method: "POST",
-    //         body: JSON.stringify(card),
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         }
-    //     })
-    //     .then(resp => resp.json())
-    //     .then (card => {
-    //         console.log(card)
-    //     })
+    fetch(MAIN_URL + "/cards", {
+            method: "POST",
+            body: JSON.stringify(card),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+        .then(resp => resp.json())
+        .then (card => {
+            //console.log(card)
+           let cardInstance = new Card(card)
+           document.querySelector("#flashcard-list").innerHTML += cardInstance.renderFlashcard();
+        })
     //     .then(deck => {
     //         let deckInstance = new Deck(deck)
     //         document.querySelector("#main-list ul").innerHTML += deckInstance.renderDeck();
