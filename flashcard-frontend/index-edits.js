@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 //get - index
 function getDecks() {
     clearForm();
-    let main = document.querySelector("#deck-list ul");
+    let main = document.querySelector("#deck-list");
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
@@ -26,7 +26,7 @@ function getDecks() {
 function clearForm() {
     let deckFormDiv = document.getElementById("deck-form");
     let cardFormDiv = document.getElementById("card-form");
-    let main = document.querySelector("#deck-list ul");
+    let main = document.querySelector("#deck-list");
      
     if (main.style.visibility === "visible") {
         deckFormDiv.innerHTML = ''
@@ -36,14 +36,15 @@ function clearForm() {
 }
 
 function attachClickToDeckLinks() {
-    let decks = document.querySelectorAll("li a");
+    //let decks = document.querySelectorAll("li a");
+    let decks = document.querySelectorAll(".deck a");
     decks.forEach(deck => {
         deck.addEventListener('click', displayDeck)
     });
 }
 
 function displayForms() {
-    let main = document.querySelector("#deck-list ul")
+    let main = document.querySelector("#deck-list")
     let deckFormDisplay = document.querySelector('#deck-create-form');
     let cardFormDisplay = document.querySelector('#card-create-form');
     deckFormDisplay.style.visibility = "hidden";
@@ -85,7 +86,7 @@ function createDeck() {
     .then(resp => resp.json())
     .then(deck => {
         let deckInstance = new Deck(deck)
-        document.querySelector("#deck-list ul").innerHTML += deckInstance.renderDeck();
+        document.querySelector("#deck-list").innerHTML += deckInstance.renderDeck();
         attachClickToDeckLinks();
         clearForm();
     })
@@ -97,7 +98,7 @@ function displayDeck(event) {
     event.preventDefault();
     clearForm();
     let id = this.dataset.id;
-    let main = document.querySelector("#deck-list ul");
+    let main = document.querySelector("#deck-list");
     main.style = "visibility: hidden;"
     main.innerHTML = '';
     displayForms();
@@ -188,14 +189,14 @@ function updateDeck(id) {
     })
     .then(resp => resp.json())
     .then(deck => {
-        document.querySelectorAll(`li a[data-id="${id}"]`)[0].parentElement.innerHTML = `
-            <li>
+        document.querySelectorAll(`#deck-list a[data-id="${id}"]`)[0].parentElement.innerHTML = `
+           
             <a href="#" data-id="${deck.id}">${deck.name}</a>
             <p>
             <button data-id=${deck.id} onclick="editDeck(${deck.id})"; return false;>Edit</button>
             <button data-id=${deck.id} onclick="removeDeck(${deck.id})"; return false;>Delete</button>
             </p>
-            </li>
+            
             `
         attachClickToDeckLinks();
         clearForm();
@@ -211,7 +212,8 @@ class Deck {
     }
     renderDeck() {
         return `
-        <li>
+       
+
         <div class="deck">
         <img src="images/cards.jpg" alt="Avatar" style="width:100%">
         <div class="container">
@@ -222,7 +224,7 @@ class Deck {
         </p>
         </div>
         </div>
-         </li>
+
         `
     }
    
@@ -365,3 +367,17 @@ function updateCard(id) {
 }
 
 
+
+// render deck
+// <li>
+// <div class="deck">
+// <img src="images/cards.jpg" alt="Avatar" style="width:100%">
+// <div class="container">
+// <a href="#" data-id="${this.id}">${this.name}</a>
+// <p>
+// <button data-id=${this.id} onclick="editDeck(${this.id})"; return false;>Edit</button>
+// <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button>
+// </p>
+// </div>
+// </div>
+//  </li>
