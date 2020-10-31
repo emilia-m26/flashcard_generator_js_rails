@@ -213,7 +213,7 @@ class Deck {
     renderDeck() {
         return `
        
-
+        
         <div class="deck">
         <img src="images/cards.jpg" alt="Avatar" style="width:100%">
         <div class="container">
@@ -224,7 +224,7 @@ class Deck {
         </p>
         </div>
         </div>
-
+        
     
 
         `

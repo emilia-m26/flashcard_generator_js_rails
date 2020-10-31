@@ -39,50 +39,48 @@ body {
     background-color: coral;
 }
 
-#deck-list li {
+#deck-list {
     list-style-type: none;
     color: gray;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
 }
 
-#deck-list li a {
+
+}
+#deck-list a {
     text-decoration: none;
     color: gray;
 }
-
 button {
     color: coral;
     background-color: white;
 }
 
-
 /*for deck card style */
-
 .deck {
     /* Add shadows to create the "card" effect */
+    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border: 1px solid black;
-    padding: 5px;
+    /* padding: 5px;
     margin: 5px;
     font-size: 20px;
     width: 25%;
-    height: 25%;
+    height: 25%; */
 }
 
-
 /* On mouse-over, add a deeper shadow */
-
 .deck:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-
 /* Add some padding inside the card container */
-
 .container {
     padding: 2px 16px;
 }
-
 .footer {
     position: relative;
     left: 0;
@@ -93,7 +91,6 @@ button {
     color: gray;
     text-align: center;
 }
-
 .footer a {
     text-decoration: none;
     color: gray;
