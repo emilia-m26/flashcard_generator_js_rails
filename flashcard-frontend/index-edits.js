@@ -364,19 +364,3 @@ function updateCard(id) {
         clearForm();
     })
 }
-
-
-
-// render deck
-// <li>
-// <div class="deck">
-// <img src="images/cards.jpg" alt="Avatar" style="width:100%">
-// <div class="container">
-// <a href="#" data-id="${this.id}">${this.name}</a>
-// <p>
-// <button data-id=${this.id} onclick="editDeck(${this.id})"; return false;>Edit</button>
-// <button data-id=${this.id} onclick="removeDeck(${this.id})"; return false;>Delete</button>
-// </p>
-// </div>
-// </div>
-//  </li>

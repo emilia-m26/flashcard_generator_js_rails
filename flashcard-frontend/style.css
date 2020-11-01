@@ -102,27 +102,6 @@ body {
 }
 
 
-/* @media screen and (max-width: 980px) {
-    body {
-        padding-top: 44px;
-    }
-    #header {
-        height: 44px;
-        line-height: 44px;
-    }
-    #header .logo {
-        font-size: 1.25em;
-        text-align: center;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #header {
-        min-width: 320px;
-    }
-} */
-
-
 /* Banner */
 
 #banner {
@@ -146,40 +125,3 @@ body {
     font-size: 1.25em;
     margin-bottom: 1.75em;
 }
-
-
-/* @media screen and (max-width: 1280px) {
-    #banner {
-        padding: 12em 0 10em 0;
-    }
-}
-
-@media screen and (max-width: 980px) {
-    #banner {
-        padding: 8em 6em 6em 6em;
-    }
-    #banner br {
-        display: none;
-    }
-    #banner h1 {
-        font-size: 2.25em;
-    }
-}
-
-@media screen and (max-width: 736px) {
-    #banner {
-        padding: 6em 4em 4em 4em;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #banner {
-        padding: 4em 2em 2em 2em;
-    }
-    #banner h1 {
-        font-size: 2em;
-    }
-    #banner p {
-        font-size: 1em;
-    }
-} */
