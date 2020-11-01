@@ -1,59 +1,37 @@
+@import "https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:300,400|Pacifico";
 body {
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.header {
-    padding: 50px;
-}
-
-.navbar ul {
-    /*removes bullets*/
-    list-style-type: none;
-    z-index: 1;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #05EAE0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.navbar li {
-    float: left;
-}
-
-.navbar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 20px 20px;
-    text-decoration: none;
-}
-
-
-/* Change the link color to coral on hover */
-
-.navbar li a:hover {
-    background-color: coral;
-}
-
 #deck-list {
     color: gray;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
     grid-gap: 20px;
 }
 
 #deck-list a {
     text-decoration: none;
     color: gray;
+    text-align: center;
+}
+
+button#starter {
+    background-color: #f6755e;
+    color: white;
 }
 
 button {
-    color: coral;
-    background-color: white;
+    background-color: lightgrey;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
 .center {
@@ -71,13 +49,14 @@ button {
     transition: 0.3s;
     border: 1px solid black;
     font-size: 20px;
+    opacity: 80%;
 }
 
 
 /* On mouse-over, add a deeper shadow */
 
 .deck:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 
@@ -87,18 +66,120 @@ button {
     padding: 15px;
 }
 
-.footer {
-    position: fixed;
+
+/* Header */
+
+body {
+    padding-top: 6em;
+}
+
+#header {
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    background: #fff;
+    cursor: default;
+    height: 6em;
     left: 0;
-    bottom: 0;
+    line-height: 6em;
+    position: fixed;
+    top: 0;
     width: 100%;
-    background-color: white;
-    border: solid turquoise;
-    color: gray;
+    z-index: 10001;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.075);
     text-align: center;
 }
 
-.footer a {
+#header .logo {
+    color: #f6755e;
+    font-family: "Pacifico", cursive;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    margin-top: -5px;
     text-decoration: none;
-    color: gray;
+    display: inline-block;
 }
+
+
+/* @media screen and (max-width: 980px) {
+    body {
+        padding-top: 44px;
+    }
+    #header {
+        height: 44px;
+        line-height: 44px;
+    }
+    #header .logo {
+        font-size: 1.25em;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #header {
+        min-width: 320px;
+    }
+} */
+
+
+/* Banner */
+
+#banner {
+    padding: 14em 0 12em 0;
+    background-image: url(./images/banner.jpg);
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+#banner h1 {
+    font-size: 3em;
+    color: #25a2c3;
+    line-height: 1em;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+}
+
+#banner p {
+    font-size: 1.25em;
+    margin-bottom: 1.75em;
+}
+
+
+/* @media screen and (max-width: 1280px) {
+    #banner {
+        padding: 12em 0 10em 0;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #banner {
+        padding: 8em 6em 6em 6em;
+    }
+    #banner br {
+        display: none;
+    }
+    #banner h1 {
+        font-size: 2.25em;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    #banner {
+        padding: 6em 4em 4em 4em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #banner {
+        padding: 4em 2em 2em 2em;
+    }
+    #banner h1 {
+        font-size: 2em;
+    }
+    #banner p {
+        font-size: 1em;
+    }
+} */

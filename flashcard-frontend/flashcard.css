@@ -10,7 +10,8 @@
     font-size: 3em;
     text-align: center;
     line-height: 160px;
-    background-color: #05EAE0;
+    background-color: #25a2c3;
+    opacity: 75%;
     border: 3px solid white;
     color: white;
 }

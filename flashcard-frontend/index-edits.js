@@ -1,13 +1,15 @@
 const MAIN_URL = "http://localhost:3000";
 
 window.addEventListener('load', () => {
-    getDecks();    
+    //getDecks();    
 })
 
 
 //get - index
 function getDecks() {
     clearForm();
+    let banner = document.querySelector("#banner");
+    banner.remove();
     let main = document.querySelector("#deck-list");
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
@@ -212,10 +214,8 @@ class Deck {
     }
     renderDeck() {
         return `
-       
-        
         <div class="deck">
-        <img src="images/cards.jpg" alt="Avatar" style="width:100%">
+        <img src="images/lightbulb.jpg" alt="Avatar" style="width:100%">
         <div class="container">
         <a href="#" data-id="${this.id}">${this.name}</a>
         <p>
@@ -224,9 +224,6 @@ class Deck {
         </p>
         </div>
         </div>
-        
-    
-
         `
     }
    
