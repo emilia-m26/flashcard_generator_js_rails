@@ -1,8 +1,13 @@
 const MAIN_URL = "http://localhost:3000";
 
-window.addEventListener('load', () => {
-    //getDecks();    
-})
+let main = document.querySelector("#deck-list");
+let deckFormDiv = document.getElementById("deck-form");
+let cardFormDiv = document.getElementById("card-form");
+let cardInfo = document.querySelector("#flashcard-list");
+
+// window.addEventListener('load', () => {
+//     //getDecks();    
+// })
 
 
 //get - index
@@ -10,7 +15,6 @@ function getDecks() {
     clearForm();
     let banner = document.querySelector("#banner");
     banner.remove();
-    let main = document.querySelector("#deck-list");
     fetch(MAIN_URL + "/decks")
         .then(resp => resp.json())
         .then(decks => {
@@ -25,11 +29,7 @@ function getDecks() {
         })
 }
 
-function clearForm() {
-    let deckFormDiv = document.getElementById("deck-form");
-    let cardFormDiv = document.getElementById("card-form");
-    let main = document.querySelector("#deck-list");
-     
+function clearForm() {     
     if (main.style.visibility === "visible") {
         deckFormDiv.innerHTML = ''
     } else {
@@ -46,7 +46,6 @@ function attachClickToDeckLinks() {
 }
 
 function displayForms() {
-    let main = document.querySelector("#deck-list")
     let deckFormDisplay = document.querySelector('#deck-create-form');
     let cardFormDisplay = document.querySelector('#card-create-form');
     deckFormDisplay.style.visibility = "hidden";
@@ -62,7 +61,6 @@ function displayForms() {
 }
 
 function displayCreateForm() {
-    let deckFormDiv = document.getElementById("deck-form");
     let html = `
         <form onsubmit="createDeck(); return false;">
         <label>Topic</label>
@@ -100,7 +98,6 @@ function displayDeck(event) {
     event.preventDefault();
     clearForm();
     let id = this.dataset.id;
-    let main = document.querySelector("#deck-list");
     main.style = "visibility: hidden;"
     main.innerHTML = '';
     displayForms();
@@ -118,14 +115,12 @@ function displayDeck(event) {
 }
 
 function renderFlashcardNoCards(id) {
-    let cardInfo = document.querySelector("#flashcard-list");
     cardInfo.innerHTML += `
     <div id="deck_id" value="${id}" style="visibility: hidden;">${id}</div>
     `
 }
 
 function renderFlashcard(card) {
-    let cardInfo = document.querySelector("#flashcard-list");
     //below displays card
     cardInfo.innerHTML += `
     <div class="flipCard">
@@ -164,7 +159,6 @@ function editDeck(id) {
     fetch(MAIN_URL + `/decks/${id}`)
         .then(resp => resp.json())
         .then(deck => {
-            let deckFormDiv = document.getElementById("deck-form")
             let html = `
             <form onsubmit="updateDeck(${id});return false;">
             <label>Name:</label>
@@ -259,7 +253,6 @@ class Card {
 /* ALL FLASHCARD CODE */
 
 function displayCreateCardForm() {
-    let cardFormDiv = document.getElementById("card-form");
     let deckID = document.getElementById("deck_id").innerHTML;
     let html = `
         <form onsubmit="createFlashcard(); return false;">
@@ -320,7 +313,6 @@ function editCard(id) {
     fetch(MAIN_URL + `/cards/${id}`)
         .then(resp => resp.json())
         .then(card => {
-            let cardFormDiv = document.getElementById("card-form")
             let html = `
             <form onsubmit="updateCard(${id});return false;">
             <label>Flashcard Front:</label>
