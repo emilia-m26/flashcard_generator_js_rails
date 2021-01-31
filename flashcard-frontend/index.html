@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="flashcard.css" />
 
+
 </head>
 
 <body>
@@ -24,7 +25,9 @@
         <div class="content">
             <h1>WELCOME!</h1>
             <p>Flashcard:Express is a flashcard generator to aid in retention of subject-matters that may be learned through question-and-answer formats.</p>
-            <button id="starter" onclick="getDecks();return false">Get Started</a></button>
+            <!-- <button id="starter" onclick="getDecks();return false;">Get Started</button> -->
+            <button id="starter">Get Started</button>
+
         </div>
     </section>
 
@@ -49,8 +52,9 @@
     <div id="deck-list" class="center">
     </div>
 
+    <script type="module" src="./decks.js"></script>
 
-    <script type="text/javascript" src="index-edits.js"></script>
+
 </body>
 
 </html>
